@@ -4,15 +4,15 @@
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
 <mapper namespace="kr.co.practice.bankmembers.BankMembersDAO">
-	<select id="login" parameterType="kr.co.practice.bankmembers.BankMembersDTO" resultType="kr.co.practice.bankmembers.BankMembersDTO">
+	<select id="login" parameterType="BankMembersDTO" resultType="BankMembersDTO">
 		SELECT username, name FROM bankmembers WHERE username = #{userName} AND password = #{password}
 	</select>
 	
-	<select id="getSearchById" parameterType="java.lang.String" resultType="kr.co.practice.bankmembers.BankMembersDTO">
+	<select id="getSearchById" parameterType="String" resultType="BankMembersDTO">
 		SELECT * FROM bankmembers WHERE username LIKE '%' || #{search} || '%' ORDER BY username ASC
 	</select>
 	
-	<insert id="setJoin" parameterType="kr.co.practice.bankmembers.BankMembersDTO">
+	<insert id="setJoin" parameterType="BankMembersDTO">
 		INSERT INTO bankmembers VALUES(#{userName}, #{password}, #{name}, #{email}, #{phone})
 	</insert>
 </mapper>

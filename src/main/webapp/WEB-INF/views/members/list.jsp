@@ -13,6 +13,17 @@
 		padding: 10px;
 		text-align: center;
 	}
+	.listTd{
+		border: 1px;
+		border-color: gray;
+		border-style: solid;
+		margin: 10px 10px 10px 10px;
+		padding: 10px;
+		font-size: 20px;
+	}
+	.listHead{
+		background-color: aqua;
+	}
 </style>
 </head>
 <body>
@@ -20,19 +31,19 @@
 	<table id="listTable">
 		<thead>
 			<tr>
-				<td>UserName</td>
-				<td>Name</td>
-				<td>Email</td>
-				<td>Phone</td>
+				<td class="listTd listHead">UserName</td>
+				<td class="listTd listHead">Name</td>
+				<td class="listTd listHead">Email</td>
+				<td class="listTd listHead">Phone</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${requestScope.memberList }" var="dto">
 				<tr>
-					<td>${pageScope.dto.userName }</td>
-					<td>${pageScope.dto.name }</td>
-					<td>${pageScope.dto.email }</td>
-					<td>${pageScope.dto.phone }</td>
+					<td class="listTd">${pageScope.dto.userName }</td>
+					<td class="listTd">${pageScope.dto.name }</td>
+					<td class="listTd">${pageScope.dto.email }</td>
+					<td class="listTd">${pageScope.dto.phone }</td>
 				</tr>
 			</c:forEach>
 		</tbody>

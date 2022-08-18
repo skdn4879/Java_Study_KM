@@ -16,7 +16,7 @@
 		<a href = "/members/logout">로그아웃</a>
 		<a href = "/members/search">회원 검색</a>
 		<hr>
-		<a href="/bankbook/list">통장 목록</a>
+		<a href="/bankBook/list">통장 목록</a>
 	</c:if>
 	
 </body>

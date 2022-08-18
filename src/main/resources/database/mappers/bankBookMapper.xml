@@ -5,7 +5,7 @@
 		    
 <mapper namespace="kr.co.practice.BankBook.BankBookDAO">
 	
-	<select id="getList" resultType="kr.co.practice.BankBook.BankBookDTO">
+	<select id="getList" resultType="BankBookDTO">
 		SELECT * FROM BANKBOOK ORDER BY BOOKNUM
 	</select>
 
