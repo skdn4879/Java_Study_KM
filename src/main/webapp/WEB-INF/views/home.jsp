@@ -6,9 +6,7 @@
 	<title>Home</title>
 </head>
 <body>
-
 	<h1>홈페이지</h1>
-
 	<c:if test="${empty sessionScope.member }">
 		<a href = "/members/login">로그인</a>
 		<a href = "/members/join">회원가입</a>
@@ -20,7 +18,6 @@
 		<hr>
 		<a href="/bankbook/list">통장 목록</a>
 	</c:if>
-	
 	
 </body>
 </html>
