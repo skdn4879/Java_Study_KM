@@ -8,5 +8,7 @@
 		<typeAlias type="kr.co.practice.bankmembers.BankMembersDTO" alias="BankMembersDTO"/>
 		<typeAlias type="java.lang.String" alias="String"/>
 		<typeAlias type="kr.co.practice.BankBook.BankBookDTO" alias="BankBookDTO"/>
+		<typeAlias type="kr.co.practice.board.BoardDto" alias="BoardDto"/>
+		<typeAlias type="java.lang.Integer" alias="Integer"/>
 	</typeAliases>
 </configuration>

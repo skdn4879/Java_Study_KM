@@ -25,31 +25,38 @@
 		background-color: aqua;
 	}
 </style>
+<c:import url="../template/bootstrapCss.jsp"></c:import>
 </head>
 <body>
-	<h1>회원 목록</h1>
-	<table id="listTable">
-		<thead>
-			<tr>
-				<td class="listTd listHead">UserName</td>
-				<td class="listTd listHead">Name</td>
-				<td class="listTd listHead">Email</td>
-				<td class="listTd listHead">Phone</td>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${requestScope.memberList }" var="dto">
-				<tr>
-					<td class="listTd">${pageScope.dto.userName }</td>
-					<td class="listTd">${pageScope.dto.name }</td>
-					<td class="listTd">${pageScope.dto.email }</td>
-					<td class="listTd">${pageScope.dto.phone }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<br>
-	<br>
-	<a href="/">메인페이지</a>
+	<c:import url="../template/header.jsp"></c:import>
+	
+	<section class="container-fluid col-lg-8 mt-4">
+		<div class="row">
+			<table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">UserName</th>
+			      <th scope="col">Name</th>
+			      <th scope="col">Email</th>
+			      <th scope="col">Phone</th>
+			    </tr>
+			  </thead>
+			  <tbody class="table-group-divider">
+			    <c:forEach items="${requestScope.memberList }" var="dto">
+			    	<tr>
+			    		<td>${pageScope.dto.userName }</td>
+						<td>${pageScope.dto.name }</td>
+						<td>${pageScope.dto.email }</td>
+						<td>${pageScope.dto.phone }</td>
+			    	</tr>
+			    </c:forEach>
+			  </tbody>
+			</table>
+		</div>
+	</section>
+	
+	<c:import url="../template/footer.jsp"></c:import>
+	
+	<c:import url="../template/bootstrapJs.jsp"></c:import>
 </body>
 </html>

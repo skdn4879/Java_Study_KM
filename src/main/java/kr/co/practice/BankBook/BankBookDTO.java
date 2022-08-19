@@ -1,14 +1,17 @@
 package kr.co.practice.BankBook;
 
+import java.util.Calendar;
+
 public class BankBookDTO {
-	private long bookNum;
+	private Long bookNum = Calendar.getInstance().getTimeInMillis();
 	private String bookName;
-	private double bookRate;
-	private int bookSale;
-	public long getBookNum() {
+	private Double bookRate;
+	private Integer bookSale = 1;
+	private String bookContents;
+	public Long getBookNum() {
 		return bookNum;
 	}
-	public void setBookNum(long bookNum) {
+	public void setBookNum(Long bookNum) {
 		this.bookNum = bookNum;
 	}
 	public String getBookName() {
@@ -17,18 +20,23 @@ public class BankBookDTO {
 	public void setBookName(String bookName) {
 		this.bookName = bookName;
 	}
-	public double getBookRate() {
+	public Double getBookRate() {
 		return bookRate;
 	}
-	public void setBookRate(double bookRate) {
+	public void setBookRate(Double bookRate) {
 		this.bookRate = bookRate;
 	}
-	public int getBookSale() {
+	public Integer getBookSale() {
 		return bookSale;
 	}
-	public void setBookSale(int bookSale) {
+	public void setBookSale(Integer bookSale) {
 		this.bookSale = bookSale;
 	}
-	
+	public String getBookContents() {
+		return bookContents;
+	}
+	public void setBookContents(String bookContents) {
+		this.bookContents = bookContents;
+	}
 	
 }

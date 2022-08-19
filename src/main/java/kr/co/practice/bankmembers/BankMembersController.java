@@ -45,7 +45,7 @@ public class BankMembersController {
 	
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String join(BankMembersDTO bankMembersDTO) throws Exception {
-		
+		bankMembersDTO.setEmail(bankMembersDTO.getEmail() + "@example.com");
 		bankMembersService.setJoin(bankMembersDTO);
 		
 		return "redirect:./login";

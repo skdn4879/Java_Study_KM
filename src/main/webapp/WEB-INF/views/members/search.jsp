@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,15 +22,24 @@
 		font-size: 20px;
 	}
 </style>
+<c:import url="../template/bootstrapCss.jsp"></c:import>
 </head>
 <body>
-	<h1>회원 검색 페이지</h1>
-	<form method="post" action="search">
-		<input id="searchBox" type="text" name="search" placeholder="검색어" required="required"><br>
-		<input id="searchButton" type="submit" value="검색">
-	</form>
-	<br>
-	<br>
-	<a href="/">메인페이지</a>
+	<c:import url="../template/header.jsp"></c:import>
+	
+	<section class="container-fluid col-lg-4 mt-4">
+		<div class="row">
+			<form method="post" action="search">
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control" placeholder="Search Word" aria-label="Recipient's username" aria-describedby="button-addon2" required="required" name="search">
+				  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+				</div>
+			</form>
+		</div>
+	</section>
+	
+	<c:import url="../template/footer.jsp"></c:import>
+	
+	<c:import url="../template/bootstrapJs.jsp"></c:import>
 </body>
 </html>

@@ -1,22 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Join Member</title>
+<c:import url="../template/bootstrapCss.jsp"></c:import>
 </head>
 <body>
-	<h1>회원가입 페이지</h1>
-	<form method="post" action="join">
-        ID<input class="boxes" type="text" name="userName" required="required"><br>
-        PW<input class="boxes" type="password" name="password" required="required"><br>
-        이름<input class="boxes" type="text" name="name" required="required"><br>
-        이메일<input class="boxes" type="email" name="email" required="required"><br>
-        전화번호<input class="boxes" type="tel" name="phone" required="required"><br>
-        <input id="join" type="submit" value="회원가입">
-        <input id="retry" type="reset" value="다시입력">
-    </form>
-    <a href="/">메인페이지</a>
+	<c:import url="../template/header.jsp"></c:import>
+	
+	<section class="container-fluid col-lg-8 mt-4">
+		<div class="row">
+			<form method="post" action="join">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">UserName</span>
+				  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="userName" required="required">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">Password</span>
+				  <input type="password" class="form-control" placeholder="Password" aria-label="Username" aria-describedby="basic-addon1" name="password" required="required">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">Name</span>
+				  <input type="text" class="form-control" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1" name="name" required="required">
+				</div>
+				<div class="input-group mb-3">
+				  <input type="text" class="form-control" placeholder="Email" aria-label="Recipient's username" aria-describedby="basic-addon2" name="email" required="required">
+				  <span class="input-group-text" id="basic-addon2">@example.com</span>
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">Phone</span>
+				  <input type="text" class="form-control" placeholder="Phone" aria-label="Username" aria-describedby="basic-addon1" name="phone" required="required">
+				</div>
+				<button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
+			</form>
+		</div>
+	</section>
+    
+    <c:import url="../template/footer.jsp"></c:import>
+	
+	<c:import url="../template/bootstrapJs.jsp"></c:import>
+
 </body>
 </html>

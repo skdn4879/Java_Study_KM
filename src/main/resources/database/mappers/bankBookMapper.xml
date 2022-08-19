@@ -4,10 +4,25 @@
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
 <mapper namespace="kr.co.practice.BankBook.BankBookDAO">
-	
-	<select id="getList" resultType="BankBookDTO">
-		SELECT * FROM BANKBOOK ORDER BY BOOKNUM
-	</select>
 
+	<select id="getList" resultType="BankBookDTO">
+		SELECT * FROM bankbook ORDER BY booknum DESC
+	</select>
+	
+	<insert id="setBankBook" parameterType="BankBookDTO">
+		INSERT INTO bankbook VALUES(#{bookNum}, #{bookName}, #{bookRate}, #{bookSale}, #{bookContents})
+	</insert>
+	
+	<select id="getDetail" parameterType="BankBookDTO" resultType="BankBookDTO">
+		SELECT * FROM bankbook WHERE booknum = #{bookNum}
+	</select>
+	
+	<update id="setUpdate" parameterType="BankBookDTO">
+		UPDATE bankbook SET bookname = #{bookName}, bookrate = #{bookRate}, booksale = #{bookSale} WHERE booknum = #{bookNum}
+	</update>
+	
+	<delete id="setDelete" parameterType="BankBookDTO">
+		DELETE FROM bankbook WHERE booknum = #{bookNum}
+	</delete>
 
 </mapper>
