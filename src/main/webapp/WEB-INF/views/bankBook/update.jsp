@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,28 +24,58 @@
 		font-size: 20px;
 		margin:10px;
 	}
-	a{
+	/* a{
 		text-decoration: none;
 		width: 100px;
 		height: 40px;
 		font-size: 20px;
 		margin: 10px 10px 10px 10px;
 		background-color: orange;
-	}
+	} */
 </style>
+
+<c:import url="../template/bootstrapCss.jsp"></c:import>
+
 </head>
 <body>
-	<h1>통장 정보 수정 페이지</h1>
+	<c:import url="../template/header.jsp"></c:import>
 	
-	<form method="post" action="update">
-		<input type="hidden" name="bookNum" value="${requestScope.bankBookDTO.bookNum }" required="required">
-		<input class="boxes" type="text" name="bookName" placeholder="BookName" required="required" value="${requestScope.bankBookDTO.bookName }"><br>
-		<input class="boxes" type="text" name="bookRate" placeholder="BookRate" required="required" value="${requestScope.bankBookDTO.bookRate }"><br>
-		<span class="radioText">판매중</span><input type="radio" name="bookSale" value="1" checked="checked"><br>
-		<span class="radioText">판매금지</span><input type="radio" name="bookSale" value="0" ><br>
-		<input id="sendButton" type="submit" value="수정">
-	</form>
+	<section class="container-fluid col-lg-8 mt-4">
+		<div class="row">
+			<form method="post" action="update">
+				<input type="hidden" name="bookNum" value="${requestScope.bankBookDTO.bookNum }" required="required">
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">BookName</span>
+				  <input type="text" class="form-control" placeholder="BookName" aria-label="Username" aria-describedby="basic-addon1" name="bookName" required="required" value="${requestScope.bankBookDTO.bookName }">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">BookRate</span>
+				  <input type="text" class="form-control" placeholder="BookRate" aria-label="Username" aria-describedby="basic-addon1" name="bookRate" required="required" value="${requestScope.bankBookDTO.bookRate }">
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="bookSale" id="flexRadioDefault2" checked value="1">
+				  <label class="form-check-label" for="flexRadioDefault2">
+				    판매중
+				  </label>
+				</div>
+				<div class="form-check">
+				  <input class="form-check-input" type="radio" name="bookSale" id="flexRadioDefault1" value="0">
+				  <label class="form-check-label" for="flexRadioDefault1">
+				    판매금지
+				  </label>
+				</div>
+				<div class="input-group input-group-lg">
+				  <span class="input-group-text">BookContents</span>
+				  <textarea class="form-control" aria-label="With textarea" name="bookContents">${requestScope.bankBookDTO.bookContents }</textarea>
+				</div>
+				<input class="btn btn-primary" type="submit" value="통장 정보 수정">
+			</form>
+		</div>
+	</section>
 	
-	<a href="/">메인페이지</a>
+	<c:import url="../template/footer.jsp"></c:import>
+	
+	<c:import url="../template/bootstrapJs.jsp"></c:import>
+	
 </body>
 </html>

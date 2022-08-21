@@ -18,7 +18,7 @@
 	</select>
 	
 	<update id="setUpdate" parameterType="BankBookDTO">
-		UPDATE bankbook SET bookname = #{bookName}, bookrate = #{bookRate}, booksale = #{bookSale} WHERE booknum = #{bookNum}
+		UPDATE bankbook SET bookname = #{bookName}, bookrate = #{bookRate}, booksale = #{bookSale}, bookcontents = #{bookContents} WHERE booknum = #{bookNum}
 	</update>
 	
 	<delete id="setDelete" parameterType="BankBookDTO">
