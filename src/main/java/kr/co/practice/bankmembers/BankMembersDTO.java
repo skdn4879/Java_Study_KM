@@ -1,5 +1,9 @@
 package kr.co.practice.bankmembers;
 
+import java.util.List;
+
+import kr.co.practice.bankaccount.BankAccountDTO;
+
 public class BankMembersDTO {
 	
 	private String userName;
@@ -7,6 +11,7 @@ public class BankMembersDTO {
 	private String name;
 	private String email;
 	private String phone;
+	private List<BankAccountDTO> bankAccountDTOs;
 	
 	public BankMembersDTO() {}
 
@@ -57,6 +62,14 @@ public class BankMembersDTO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public List<BankAccountDTO> getBankAccountDTOs() {
+		return bankAccountDTOs;
+	}
+
+	public void setBankAccountDTOs(List<BankAccountDTO> bankAccountDTOs) {
+		this.bankAccountDTOs = bankAccountDTOs;
 	}
 	
 	

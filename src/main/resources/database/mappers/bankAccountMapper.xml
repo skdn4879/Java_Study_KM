@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+		    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+		    
+<mapper namespace="kr.co.practice.bankaccount.BankAccountDAO">
+	<select id="getUserAccountDetail" parameterType="BankAccountDTO" resultType="BankAccountDTO">
+		SELECT accountnum, booknum, accountdate FROM bankaccount WHERE username = #{userName}
+	</select>
+	
+	<select id="getUserAccountDetailJoin" parameterType="BankMembersDTO" resultMap="getListByUserNameResult">
+		SELECT ba.accountnum, bb.bookname, bb.bookrate, ba.accountDate FROM bankaccount ba INNER JOIN bankbook bb USING(booknum) WHERE ba.username = #{userName}
+	</select>
+	
+	<resultMap type="BankAccountDTO" id="getListByUserNameResult">
+		<id column="ACCOUNTNUM" property="accountNum"/>
+		<result column="ACCOUNTDATE" property="accountDate"/>
+		
+		<association property="bankBookDTO" javaType="BankBookDTO">
+			<!-- 쿼리에서 bankbook테이블의 pk인 booknum을 가져오지 않으므로 id는 안씀 -->
+			<result column="BOOKNAME" property="bookName"/>
+			<result column="BOOKRATE" property="bookRate"/>
+		</association>
+	</resultMap>
+	
+</mapper>

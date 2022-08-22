@@ -11,5 +11,9 @@ public interface MembersDAO {
 	public List<BankMembersDTO> getSearchById(String search) throws Exception;
 		
 	public BankMembersDTO login(BankMembersDTO bankMembersDto) throws Exception;
+	
+	public BankMembersDTO getDetail(BankMembersDTO bankMembersDTO) throws Exception;
+	
+	public BankMembersDTO getMyPage(BankMembersDTO bankMembersDTO) throws Exception;
 
 }

@@ -1,6 +1,9 @@
 package kr.co.practice.BankBook;
 
 import java.util.Calendar;
+import java.util.List;
+
+import kr.co.practice.bankaccount.BankAccountDTO;
 
 public class BankBookDTO {
 	private Long bookNum = Calendar.getInstance().getTimeInMillis();
@@ -8,6 +11,9 @@ public class BankBookDTO {
 	private Double bookRate;
 	private Integer bookSale = 1;
 	private String bookContents;
+	private List<BankAccountDTO> bankAccountDTOs;	// BankAccount 1개는 BankBook 1개와 대응, BankBook 1개는 BankAccount n개와 대응
+	// BankBook 입장에서는 BankAccount 1대n관계이므로 List 멤버로 표현 가능
+	
 	public Long getBookNum() {
 		return bookNum;
 	}
@@ -37,6 +43,12 @@ public class BankBookDTO {
 	}
 	public void setBookContents(String bookContents) {
 		this.bookContents = bookContents;
+	}
+	public List<BankAccountDTO> getBankAccountDTOs() {
+		return bankAccountDTOs;
+	}
+	public void setBankAccountDTOs(List<BankAccountDTO> bankAccountDTOs) {
+		this.bankAccountDTOs = bankAccountDTOs;
 	}
 	
 }
