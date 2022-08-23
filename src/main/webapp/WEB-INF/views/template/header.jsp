@@ -17,7 +17,10 @@
                     <a class="nav-link" href="/bankbook/list">상품리스트</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/board/list">공지사항</a>
+                    <a class="nav-link" href="/notice/list.iu">공지사항</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/qna/list.iu">Q&A</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/members/search">회원검색</a>
