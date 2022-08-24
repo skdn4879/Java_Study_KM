@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.practice.board.impl.BoardDTO;
+import kr.co.practice.util.Pager;
 
 @Controller
 @RequestMapping(value = "/notice/*")
@@ -27,10 +28,16 @@ public class NoticeController {
 	
 	//글 목록
 	@RequestMapping(value = "list.iu", method = RequestMethod.GET)
-	public ModelAndView getList(@RequestParam(defaultValue = "1") Long page) throws Exception {
-		List<BoardDTO> ar = noticeService.getList(page);
+	public ModelAndView getList(Pager pager) throws Exception {
+		// Pager 클래스가 멤버로 page라는 이름의 변수를 가지므로 page라는 이름의 파라미터가 전달되면
+		// dispatcher가 Pager의 setter를 이용해 Pager에 담아서 보내준다.
+		
+		System.out.println(pager.getPage());
+		List<BoardDTO> ar = noticeService.getList(pager);
+		
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("list", ar);
+		mv.addObject("pager", pager);
 		mv.setViewName("board/list");
 		
 		return mv;

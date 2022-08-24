@@ -16,5 +16,6 @@
 		<typeAlias type="kr.co.practice.board.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="kr.co.practice.board.impl.BoardDTO" alias="BoardDTO"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
+		<typeAlias type="kr.co.practice.util.Pager" alias="Pager"/>
 	</typeAliases>
 </configuration>

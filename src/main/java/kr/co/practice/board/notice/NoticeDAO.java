@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.practice.board.impl.BoardDAO;
 import kr.co.practice.board.impl.BoardDTO;
+import kr.co.practice.util.Pager;
 
 @Repository
 public class NoticeDAO implements BoardDAO {
@@ -19,9 +20,9 @@ public class NoticeDAO implements BoardDAO {
 	private final String NAMESPACE = "kr.co.practice.board.notice.NoticeDAO.";
 
 	@Override
-	public List<BoardDTO> getList(Map<String, Long> map) throws Exception {
-		
-		return sqlSession.selectList(NAMESPACE + "getList", map);
+	public List<BoardDTO> getList(Pager pager) throws Exception {
+		// Pager에 Mapper의 startRow, lastRow에 대응하는 setter가 있으므로 쓸 수 있다.
+		return sqlSession.selectList(NAMESPACE + "getList", pager);
 	}
 
 	@Override

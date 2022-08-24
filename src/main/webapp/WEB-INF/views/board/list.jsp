@@ -43,12 +43,32 @@
 			  </tbody>
 			</table>
 		</div>
+		
 		<c:if test="${not empty sessionScope.member }">
 			<div class="row">
 				<a class="btn btn-success" href="./add.iu" role="button">${requestScope.board } 작성</a>
 			</div>
 		</c:if>
+		
 	</section>
+	
+	<nav aria-label="Page navigation example">
+	  <ul class="pagination justify-content-center">
+	    <li class="page-item">
+	      <a class="page-link" href="#" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <c:forEach begin="${pager.startNum }" end="${pager.lastNum }" step="1" var="i">
+	    	<li class="page-item"><a class="page-link" href="./list.iu?page=${i }">${i }</a></li>
+	    </c:forEach>
+	    <li class="page-item">
+	      <a class="page-link" href="#" aria-label="Next">
+	        <span aria-hidden="true">&raquo;</span>
+	      </a>
+	    </li>
+	  </ul>
+	</nav>
 	
 	<c:import url="../template/footer.jsp"></c:import>
 	

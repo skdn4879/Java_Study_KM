@@ -43,11 +43,13 @@
 			  </tbody>
 			</table>
 		</div>
+		
 		<c:if test="${not empty sessionScope.member }">
 			<div class="row">
 				<a class="btn btn-success" href="./add.iu" role="button">공지사항 작성</a>
 			</div>
 		</c:if>
+		
 	</section>
 	
 	<c:import url="../template/footer.jsp"></c:import>
