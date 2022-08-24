@@ -15,5 +15,6 @@
 		<typeAlias type="kr.co.practice.board.notice.NoticeDTO" alias="NoticeDTO"/>
 		<typeAlias type="kr.co.practice.board.qna.QnaDTO" alias="QnaDTO"/>
 		<typeAlias type="kr.co.practice.board.impl.BoardDTO" alias="BoardDTO"/>
+		<typeAlias type="java.lang.Long" alias="Long"/>
 	</typeAliases>
 </configuration>

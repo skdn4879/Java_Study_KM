@@ -1,12 +1,13 @@
 package kr.co.practice.board.impl;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BoardDAO {
 	// Notice와 Qna는 다른 DTO이지만 둘 다 부모인 BoardDTO 타입
 	
 	//글목록
-	public List<BoardDTO> getList() throws Exception;
+	public List<BoardDTO> getList(Map<String, Long> map) throws Exception;
 	
 	//글상세
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception;
@@ -19,5 +20,8 @@ public interface BoardDAO {
 	
 	//글삭제
 	public int setDelete(BoardDTO boardDTO) throws Exception;
+	
+	//글의 총 개수
+	public Long getCount() throws Exception;
 
 }

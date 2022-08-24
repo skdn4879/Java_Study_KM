@@ -5,8 +5,8 @@
 		    
 <mapper namespace="kr.co.practice.board.notice.NoticeDAO">
 
-	<select id="getList" resultType="NoticeDTO">
-		SELECT * FROM (SELECT * FROM notice ORDER BY regdate DESC) WHERE ROWNUM <![CDATA[<=]]> 10
+	<select id="getList" parameterType="java.util.Map" resultType="NoticeDTO">
+		SELECT * FROM (SELECT ROWNUM R, N.* FROM (SELECT * FROM notice ORDER BY num DESC) N) WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
 	<select id="getDetail" parameterType="BoardDTO" resultType="NoticeDTO">
@@ -24,5 +24,9 @@
 	<delete id="setDelete" parameterType="BoardDTO">
 		DELETE FROM notice WHERE num = #{num}
 	</delete>
+	
+	<select id="getCount" resultType="Long">
+		SELECT COUNT(num) FROM notice
+	</select>
 	
 </mapper>
