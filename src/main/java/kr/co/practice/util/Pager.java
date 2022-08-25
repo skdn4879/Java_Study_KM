@@ -19,6 +19,11 @@ public class Pager {
 	private Long perBlock;
 	// 아니면 멤버의 초기값으로 넣어주어도된다.
 	
+	// 이전 블럭의 유무 - 이전 블럭이 있으면 true, 없으면 false
+	private boolean pre;
+	// 다음 블럭의 유무 - 다음 블럭이 있으면 true, 없으면 false
+	private boolean next;
+	
 	public Pager() {
 		this.perPage = 10L;
 		this.perBlock = 5L;
@@ -42,6 +47,11 @@ public class Pager {
 			totalPage++;
 		}
 		
+		//현재 page가 totalPage보다 큰 경우
+		if(this.getPage() > totalPage) {
+			this.setPage(totalPage);
+		}
+		
 		// totalBlock 구하기
 		Long totalBlock = totalPage / this.getPerBlock();
 		if(totalPage % this.getPerBlock() > 0) {
@@ -58,10 +68,24 @@ public class Pager {
 		this.startNum = (curBlock - 1) * this.getPerBlock() + 1;
 		this.lastNum = curBlock * this.getPerBlock();
 		
+		// 현재 블록이 마지막 블록일때 curBlock == totalBlock
+		if(curBlock == totalBlock) {
+			this.lastNum = totalPage;	// 최종 페이지까지만 하겠다.
+		}
+		
+		// 이전, 다음 블록 유무
+		if(curBlock > 1) {
+			pre = true;
+		}
+		
+		if(curBlock < totalBlock) {
+			next = true;
+		}
+		
 	}
 	
 	public Long getPage() {
-		if(this.page == null) {
+		if(this.page == null || this.page <= 0) {
 			this.page = 1L;
 		}	//맨 처음엔 파라미터가 넘어오지 않으므로
 		
@@ -113,6 +137,22 @@ public class Pager {
 
 	public void setPerBlock(Long perBlock) {
 		this.perBlock = perBlock;
+	}
+
+	public boolean isPre() {
+		return pre;
+	}
+
+	public void setPre(boolean pre) {
+		this.pre = pre;
+	}
+
+	public boolean isNext() {
+		return next;
+	}
+
+	public void setNext(boolean next) {
+		this.next = next;
 	}
 
 }
