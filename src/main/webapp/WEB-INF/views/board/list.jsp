@@ -17,6 +17,33 @@
 		<div class="row">
 			<h2>${requestScope.board } List</h2>
 		</div>
+		
+		<div class="row mb-3">
+			<form method="get" action="./list.iu" class="row row-cols-lg-auto g-3 align-items-center">
+				<!-- Controller에서 list를 받는것은 get뿐이므로, 생략가능 -->
+			  <div class="col-12">
+			    <label class="visually-hidden" for="search">검색어</label>
+			    <!-- 라벨의 for와 input의 id를 같게하면 같은 영역으로 인식되서 편리하다. -->
+			    <div class="input-group">
+			      <input type="text" class="form-control" id="search" name="search">
+			    </div>
+			  </div>
+			
+			  <div class="col-12">
+			    <label class="visually-hidden" for="kind">Kind</label>
+			    <select name="kind" class="form-select" id="kind">
+			      <option value="contents">Contents</option>
+			      <option value="title">Title</option>
+			      <option value="writer">Writer</option>
+			    </select>
+			  </div>
+			
+			  <div class="col-12">
+			    <button type="submit" class="btn btn-primary">Submit</button>
+			  </div>
+			</form>
+		</div>
+		
 		<div class="row">
 			<table class="table table-primary">
 			  <thead>
@@ -33,7 +60,15 @@
 			    <c:forEach items="${requestScope.list }" var="dto">
 			    	<tr>
 			    		<td>${pageScope.dto.num }</td>
-			    		<td><a href="./detail.iu?num=${pageScope.dto.num }">${pageScope.dto.title }</a></td>
+			    		<td>
+			    		<!-- NoticeDTO에는 depth가 없으므로 예외처리 -->
+			    		<c:catch>
+			    			<!-- 답글의 깊이에 따라 들여쓰기 -->
+			    			<%-- for(int i = begin; i <= end; i++) --%>
+			    			<c:forEach begin="1" end="${dto.depth }" step="1">--</c:forEach>
+			    		</c:catch>
+			    		<a href="./detail.iu?num=${pageScope.dto.num }">${pageScope.dto.title }</a>
+			    		</td>
 			    		<td>${pageScope.dto.contents }</td>
 			    		<td>${pageScope.dto.writer }</td>
 			    		<td>${pageScope.dto.regDate }</td>
@@ -45,7 +80,7 @@
 		</div>
 		
 		<c:if test="${not empty sessionScope.member }">
-			<div class="row">
+			<div class="row mt-4 mb-4">
 				<a class="btn btn-success" href="./add.iu" role="button">${requestScope.board } 작성</a>
 			</div>
 		</c:if>
@@ -56,14 +91,14 @@
 	  <ul class="pagination justify-content-center">
 	  	<c:if test="${pager.pre }">
 	  		<li class="page-item">
-		      <a class="page-link" href="./list.iu?page=${pager.startNum - 1 }" aria-label="Previous">
+		      <a class="page-link" href="./list.iu?page=${pager.startNum - 1 }&kind=${pager.kind}&search=${pager.search}" aria-label="Previous">
 		        <span aria-hidden="true">&laquo;</span>
 		      </a>
 		    </li>
 	  	</c:if>
 	    
 	    <c:forEach begin="${pager.startNum }" end="${pager.lastNum }" step="1" var="i">
-	    	<li class="page-item"><a class="page-link" href="./list.iu?page=${i }">${i }</a></li>
+	    	<li class="page-item"><a class="page-link" href="./list.iu?page=${i }&kind=${pager.kind}&search=${pager.search}">${i }</a></li>
 	    </c:forEach>
 	    
 	    <%-- <c:choose>
@@ -75,7 +110,7 @@
 	    	</c:otherwise>
 	    </c:choose> --%>
 	    <li class="page-item ${pager.next ? '' : 'disabled' }">
-	      <a class="page-link" href="./list.iu?page=${pager.lastNum + 1 }" aria-label="Next">
+	      <a class="page-link" href="./list.iu?page=${pager.lastNum + 1 }&kind=${pager.kind}&search=${pager.search}" aria-label="Next">
 	        <span aria-hidden="true">&raquo;</span>
 	      </a>
 	    </li>

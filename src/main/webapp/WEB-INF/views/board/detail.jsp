@@ -47,6 +47,11 @@
 				<a class="btn btn-danger" href="./delete.iu?num=${requestScope.boardDTO.num }" role="button">${requestScope.board } 삭제</a>
 			</div>
 		</c:if>
+		
+		<div class="row mt-4">
+			<a href="./reply.iu?num=${requestScope.boardDTO.num }" class="btn btn-danger">Reply</a>
+		</div>
+		
 	</section>
 	
 	<c:import url="../template/footer.jsp"></c:import>

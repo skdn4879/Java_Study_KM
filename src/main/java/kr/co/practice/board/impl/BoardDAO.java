@@ -24,6 +24,6 @@ public interface BoardDAO {
 	public int setDelete(BoardDTO boardDTO) throws Exception;
 	
 	//글의 총 개수
-	public Long getCount() throws Exception;
+	public Long getCount(Pager pager) throws Exception;
 
 }

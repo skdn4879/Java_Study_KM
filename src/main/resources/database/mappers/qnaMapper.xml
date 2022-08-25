@@ -4,9 +4,37 @@
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
 <mapper namespace="kr.co.practice.board.qna.QnaDAO">
+
+	<insert id="setReplyAdd" parameterType="QnaDTO">
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			SELECT BOARD_SEQ.NEXTVAL FROM dual
+		</selectKey>
+		INSERT INTO qna(num, title, contents, writer, ref, step, depth) VALUES(#{num}, #{title}, #{contents}, #{writer}, #{ref}, #{step}, #{depth})
+	</insert>
+
+	<update id="setStepUpdate" parameterType="QnaDTO">
+		UPDATE qna SET step = (step + 1) WHERE ref = #{ref} AND step > #{step}
+	</update>
+
+	<sql id="search">
+		WHERE
+			<choose>
+				<when test="kind == 'title'">title</when>
+				<when test="kind == 'writer'">writer</when>
+				<otherwise>contents</otherwise>
+			</choose>
+		LIKE '%' || #{search} || '%'
+	</sql>
 	
-	<select id="getList" resultType="QnaDTO">
-		SELECT * FROM qna ORDER BY regdate DESC
+	<select id="getList" parameterType="Pager" resultType="QnaDTO">
+		SELECT * FROM 
+			(
+				SELECT ROWNUM R, Q.* FROM
+					(SELECT * FROM qna
+						<include refid="search"></include>
+					 ORDER BY REF DESC, STEP ASC) Q
+					) 
+				WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
 	<select id="getDetail" parameterType="BoardDTO" resultType="QnaDTO">
@@ -14,7 +42,14 @@
 	</select>
 	
 	<insert id="setAdd" parameterType="BoardDTO">
-		INSERT INTO qna(title, contents, writer, ref, step, depth) VALUES(#{title}, #{contents}, #{writer}, 0, 0, 0)
+		<!-- keyProperty = parameterType의 동일한 이름의 setter를 호출해 대응되는 멤버에 값 세팅 -->
+		<!-- 우리는 title contents writer를 BoardDTO에 담아서 받는다. 따라서 받을 때 num값은 null -->
+		<!-- 이렇게 받기 싫으면 default를 지정하고 안넣어주어도 된다. 그리고 ref에 BOARD_SEQ.CURRVAL로 써도 무방하다. -->
+		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+			SELECT BOARD_SEQ.NEXTVAL FROM dual
+		</selectKey>
+		<!-- order BEFORE = 아래의 쿼리를 실행하기 전에 -->
+		INSERT INTO qna(num, title, contents, writer, ref, step, depth) VALUES(#{num}, #{title}, #{contents}, #{writer}, #{num}, 0, 0)
 	</insert>
 	
 	<update id="setUpdate" parameterType="BoardDTO">
@@ -24,5 +59,10 @@
 	<delete id="setDelete" parameterType="BoardDTO">
 		DELETE FROM qna WHERE num = #{num}
 	</delete>
+	
+	<select id="getCount" parameterType="Pager" resultType="Long">
+		SELECT COUNT(num) FROM qna
+			<include refid="search"></include>
+	</select>
 	
 </mapper>

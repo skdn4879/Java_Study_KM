@@ -18,19 +18,35 @@ public class QnaDAOTest extends MyAbstractTest {
 	private QnaDAO qnaDAO;
 	
 	@Test
+	public void setAddTest() throws Exception {
+		for(int i = 0; i < 70; i++) {
+			 QnaDTO qnaDTO = new QnaDTO();
+			 qnaDTO.setTitle("Title" + i);
+			 qnaDTO.setWriter("lemon");
+			 qnaDTO.setContents("Contents" + i);
+			 
+			 int result = qnaDAO.setAdd(qnaDTO);
+			 
+			 if(i % 10 == 0) {
+				 Thread.sleep(500);
+			 }
+		 }
+	}
+	
+	/*@Test
 	public void getListTest() throws Exception{
 		List<BoardDTO> ar = qnaDAO.getList();
 		assertNotEquals(0, ar.size());
-	}
+	}*/
 	
-	@Test
+	/*@Test
 	public void getDetailTest() throws Exception{
 		BoardDTO boardDTO = new BoardDTO();
 		boardDTO.setNum(21L);
 		boardDTO = qnaDAO.getDetail(boardDTO);
 		
 		assertNotNull(boardDTO);
-	}
+	}*/
 	
 	/*
 	 * @Test public void setAddTest() throws Exception{ BoardDTO boardDTO = new

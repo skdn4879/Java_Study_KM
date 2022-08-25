@@ -15,12 +15,12 @@ public class NoticeDAOTest extends MyAbstractTest {
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
-	@Test
+	/*@Test
 	public void getCountTest() throws Exception {
 		long result = noticeDAO.getCount();
 		System.out.println(result);
 		assertEquals(102, result);
-	}
+	}*/
 
 	/*@Test
 	public void getListTest() throws Exception {

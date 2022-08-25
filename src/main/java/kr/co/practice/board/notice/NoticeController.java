@@ -33,6 +33,8 @@ public class NoticeController {
 		// dispatcher가 Pager의 setter를 이용해 Pager에 담아서 보내준다.
 		
 		System.out.println(pager.getPage());
+		System.out.println(pager.getKind());
+		System.out.println(pager.getSearch());
 		List<BoardDTO> ar = noticeService.getList(pager);
 		
 		ModelAndView mv = new ModelAndView();

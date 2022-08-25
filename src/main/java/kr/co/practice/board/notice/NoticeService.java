@@ -23,7 +23,7 @@ public class NoticeService implements BoardService {
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		
 		
-		Long totalCount = noticeDAO.getCount();
+		Long totalCount = noticeDAO.getCount(pager);
 		pager.getNum(totalCount);
 		pager.getRowNum(); // 순서 바뀌면 마지막 페이지에서 다음 누르면 결과 이상해짐
 		//Pager에 처리하거나 아니면 순서를 중요시하거나
