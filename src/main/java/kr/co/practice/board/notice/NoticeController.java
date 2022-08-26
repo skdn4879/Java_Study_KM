@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.practice.board.impl.BoardDTO;
@@ -61,8 +62,8 @@ public class NoticeController {
 		return "board/add";
 	}
 	@RequestMapping(value = "add.iu", method = RequestMethod.POST)
-	public ModelAndView setAdd(BoardDTO boardDTO) throws Exception {
-		int result = noticeService.setAdd(boardDTO);
+	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+		int result = noticeService.setAdd(boardDTO, files);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:./list.iu");
 		//ModelAndView로도 redirect 가능, 근데 굳이;;;;

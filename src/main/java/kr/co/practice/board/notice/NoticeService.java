@@ -1,11 +1,16 @@
 package kr.co.practice.board.notice;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.practice.board.impl.BoardDTO;
 import kr.co.practice.board.impl.BoardService;
@@ -18,6 +23,9 @@ public class NoticeService implements BoardService {
 	
 	@Autowired
 	private NoticeDAO noticeDAO;
+	
+	@Autowired
+	private ServletContext servletContext;
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
@@ -117,9 +125,48 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setAdd(BoardDTO boardDTO) throws Exception {
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
 		
-		return noticeDAO.setAdd(boardDTO);
+		for(MultipartFile mf : files) { // 전달 받은 파일에 접근
+			if(mf.getSize() != 0) {	// 파일 객체 안에 값이 존재하면
+				// 파일 경로 /resources/upload/notice
+				
+				// OS 기준 파일 경로
+				String realPath = servletContext.getRealPath("resources/upload/notice");
+				
+				// 경로를 담을 File 객체
+				File file = new File(realPath);
+				
+				if(!file.exists()) {
+					file.mkdirs();
+				} // 경로 미존재 시 생성
+				
+				// 중복되지 않는 파일명 처리 및 확장자 처리
+				String fileName = UUID.randomUUID().toString();
+				fileName = fileName + "_" + mf.getOriginalFilename();
+				
+				// 실제 저장할 파일 객체
+				file = new File(file, fileName);
+				
+				// 실제 HDD에 저장
+				mf.transferTo(file);
+				
+				System.out.println(fileName);
+				
+				// 실제 DB 저장
+				
+				/**
+				 * 주말 할일 : Notice, Qna 파일 관련 완성 (DB 테이블 포함, sqldeveloper 참고) + 가능하면 BankBook까지
+				 * 파일 업로드 할려면 PK를 받아와야 하는데 어떻게 받아서 넣어줄지 (Qna할 때 했음)
+				 * Qna 파일 경로는 /resources/upload/qna
+				 * BankMembers, Notice, Qna, Bankbook 다 파일 업로드 필요한데 공통 코드를 어떻게 처리할지
+				 * */
+				
+			}
+		}
+		
+		//return noticeDAO.setAdd(boardDTO);
+		return 0;
 	}
 
 	@Override

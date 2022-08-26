@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>Add Page</title>
 
+<c:import url="../template/jQueryJs.jsp"></c:import>
 <c:import url="../template/bootstrapCss.jsp"></c:import>
+<c:import url="../template/summerNote.jsp"></c:import>
 
 </head>
 <body>
@@ -18,7 +20,7 @@
 			<h2>${requestScope.board } 작성</h2>
 		</div>
 		<div class="row">
-			<form method="post" action="add.iu">
+			<form method="post" action="add.iu" enctype="multipart/form-data">
 				<div class="input-group mb-3">
 				  <span class="input-group-text" id="basic-addon1">Title</span>
 				  <input type="text" class="form-control" placeholder="Title" aria-label="Username"
@@ -31,8 +33,22 @@
 				</div>
 				<div class="input-group input-group-lg">
 				  <span class="input-group-text">Contents</span>
-				  <textarea class="form-control" aria-label="With textarea" name="contents"></textarea>
+				  <textarea class="form-control" aria-label="With textarea" name="contents" id="contents"></textarea>
 				</div>
+				
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">File</span>
+				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">File</span>
+				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">File</span>
+				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+				</div>
+				
 				<input class="btn btn-primary" type="submit" value="${requestScope.board } 작성">
 			</form>
 		</div>
@@ -41,6 +57,10 @@
 	<c:import url="../template/footer.jsp"></c:import>
 	
 	<c:import url="../template/bootstrapJs.jsp"></c:import>
+	
+	<script type="text/javascript">
+		$("#contents").summernote();
+	</script>
 	
 </body>
 </html>

@@ -4,6 +4,11 @@
 		    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 		    
 <mapper namespace="kr.co.practice.bankmembers.BankMembersDAO">
+
+	<insert id="setAddFile" parameterType="BankMembersFileDTO">
+		INSERT INTO memberfile(filenum, username, filename, oriname) VALUES(FILE_SEQ.NEXTVAL, #{userName}, #{fileName}, #{oriName})
+	</insert>
+
 	<select id="login" parameterType="BankMembersDTO" resultType="BankMembersDTO">
 		SELECT username, name FROM bankmembers WHERE username = #{userName} AND password = #{password}
 	</select>
@@ -22,7 +27,15 @@
 	
 	<select id="getMyPage" parameterType="BankMembersDTO" resultMap="getMyPageResult">
 		<!-- Join 테이블 순서도 중요하다. bankmembers와 bankaccount는 관계가 있지만 bankmembers와 bankbook은 관계가 없으므로 이 둘을 먼저 조인하면 안된다. -->
-		SELECT bm.username, bm.name, bm.email, bm.phone, ba.accountnum, bb.bookname, ba.accountdate FROM bankmembers bm INNER JOIN bankaccount ba ON (bm.username = ba.username) INNER JOIN bankbook bb ON (ba.booknum = bb.booknum) WHERE bm.username = #{userName}
+		SELECT bm.username, bm.name, bm.email, bm.phone, mf.filenum, mf.filename, ba.accountnum, bb.bookname, ba.accountdate 
+	    FROM bankmembers bm 
+	    LEFT JOIN memberfile mf 
+	    ON (bm.username = mf.username) 
+	    LEFT JOIN bankaccount ba 
+	    ON (bm.username = ba.username) 
+	    LEFT JOIN bankbook bb 
+	    ON (ba.booknum = bb.booknum) 
+	    WHERE bm.username = #{userName}
 	</select>
 	
 	<resultMap type="BankMembersDTO" id="getMyPageResult">
@@ -31,6 +44,11 @@
 		<result column="EMAIL" property="email"/>
 		<result column="PHONE" property="phone"/>
 		
+		<association property="bankMembersFileDTO" javaType="BankMembersFileDTO">
+			<id column="FILENUM" property="fileNum"/>
+			<result column="FILENAME" property="fileName"/>
+		</association>
+		
 		<collection property="bankAccountDTOs" javaType="List" ofType="BankAccountDTO">
 			<id column="ACCOUNTNUM" property="accountNum"/>
 			<result column="ACCOUNTDATE" property="accountDate"/>
@@ -38,10 +56,8 @@
 			<association property="bankBookDTO" javaType="BankBookDTO">
 				<result column="BOOKNAME" property="bookName"/>
 			</association>
-			
+			<!-- bankbook은 BankMembersDTO의 맴버가 아닌 BankAccountDTO의 맴버 -->
 		</collection>
-		
-		<!-- bankbook은 BankMembersDTO의 맴버가 아닌 BankAccountDTO의 맴버 -->
 		
 	</resultMap>
 	

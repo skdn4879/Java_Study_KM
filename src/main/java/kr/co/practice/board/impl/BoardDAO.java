@@ -3,6 +3,8 @@ package kr.co.practice.board.impl;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.co.practice.util.Pager;
 
 public interface BoardDAO {

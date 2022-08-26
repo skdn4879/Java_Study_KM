@@ -17,5 +17,7 @@
 		<typeAlias type="kr.co.practice.board.impl.BoardDTO" alias="BoardDTO"/>
 		<typeAlias type="java.lang.Long" alias="Long"/>
 		<typeAlias type="kr.co.practice.util.Pager" alias="Pager"/>
+		<typeAlias type="kr.co.practice.file.FileDTO" alias="FileDTO"/>
+		<typeAlias type="kr.co.practice.bankmembers.BankMembersFileDTO" alias="BankMembersFileDTO"/>
 	</typeAliases>
 </configuration>

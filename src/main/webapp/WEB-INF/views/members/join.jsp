@@ -13,7 +13,7 @@
 	
 	<section class="container-fluid col-lg-8 mt-4">
 		<div class="row">
-			<form method="post" action="join">
+			<form method="post" action="join" enctype="multipart/form-data">
 				<div class="input-group mb-3">
 				  <span class="input-group-text" id="basic-addon1">UserName</span>
 				  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="userName" required="required">
@@ -33,6 +33,10 @@
 				<div class="input-group mb-3">
 				  <span class="input-group-text" id="basic-addon1">Phone</span>
 				  <input type="text" class="form-control" placeholder="Phone" aria-label="Username" aria-describedby="basic-addon1" name="phone" required="required">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">Photo</span>
+				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="photo">
 				</div>
 				<button class="w-100 btn btn-lg btn-primary" type="submit">Sign Up</button>
 			</form>

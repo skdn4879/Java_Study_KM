@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.practice.bankaccount.BankAccountDTO;
@@ -52,9 +53,17 @@ public class BankMembersController {
 	}
 	
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	public String join(BankMembersDTO bankMembersDTO) throws Exception {
+	public String join(BankMembersDTO bankMembersDTO, MultipartFile photo) throws Exception {
+		//bankMembersDTO.setEmail(bankMembersDTO.getEmail() + "@example.com");
+		//bankMembersService.setJoin(bankMembersDTO);
+		System.out.println(photo);
+		
+		System.out.println("업로드할때 파일명      : " + photo.getOriginalFilename());
+		System.out.println("업로드할때 파라미터 이름 : " + photo.getName());
+		System.out.println("업로드하는 파일 크기    :" + photo.getSize());
+		
 		bankMembersDTO.setEmail(bankMembersDTO.getEmail() + "@example.com");
-		bankMembersService.setJoin(bankMembersDTO);
+		int result = bankMembersService.setJoin(bankMembersDTO, photo);
 		
 		return "redirect:./login";
 	}

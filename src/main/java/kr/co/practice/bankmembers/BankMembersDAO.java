@@ -13,6 +13,10 @@ public class BankMembersDAO implements MembersDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "kr.co.practice.bankmembers.BankMembersDAO.";
 	
+	public int setAddFile(BankMembersFileDTO bankMembersFileDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "setAddFile", bankMembersFileDTO);
+	}
+	
 	@Override
 	public int setJoin(BankMembersDTO bankMembersDto) throws Exception {
 		

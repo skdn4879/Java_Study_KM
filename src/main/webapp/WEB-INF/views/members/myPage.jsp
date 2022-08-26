@@ -162,6 +162,29 @@
 			  </tbody>
 			</table>
 		</div>
+		<div class="row">
+			<h2>My Photo Info</h2>
+		</div>
+		<div class="row">
+			<table class="table table-info">
+			  <thead>
+			    <tr>
+			      <th scope="col">FileNumber</th>
+			      <th scope="col">FileName</th>
+			    </tr>
+			  </thead>
+			  <tbody class="table-group-divider">
+			  	<tr>
+			  		<td>${memberDto.bankMembersFileDTO.fileNum }</td>
+			  		<td>${memberDto.bankMembersFileDTO.fileName }</td>
+			  	</tr>
+			  </tbody>
+			</table>
+		</div>
+		<div class="row">
+			<!-- 서버의 우리 프로젝트 경로 안에 실제로 파일이 저장되어 있으니 가져온다. -->
+			<img alt="" src="../resources/upload/member/${memberDto.bankMembersFileDTO.fileName }"/>
+		</div>
 	</section>
 	
 	<c:import url="../template/footer.jsp"></c:import>
