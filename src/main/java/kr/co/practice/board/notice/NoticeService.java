@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.co.practice.board.impl.BoardDTO;
 import kr.co.practice.board.impl.BoardFileDTO;
 import kr.co.practice.board.impl.BoardService;
+import kr.co.practice.util.FileManager;
 import kr.co.practice.util.Pager;
 
 @Service
@@ -25,8 +26,12 @@ public class NoticeService implements BoardService {
 	@Autowired
 	private NoticeDAO noticeDAO;
 	
+	/*
+	 * @Autowired private ServletContext servletContext;
+	 */
+	
 	@Autowired
-	private ServletContext servletContext;
+	private FileManager fileManager;
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
@@ -126,11 +131,26 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception {
 		
 		int result = noticeDAO.setAdd(boardDTO);
+		String path = "resources/upload/notice";
 		
-		for(MultipartFile mf : files) { // 전달 받은 파일에 접근
+		for(MultipartFile multipartFile : files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.saveFile(servletContext, path, multipartFile);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFileDTO.setNum(boardDTO.getNum());
+			noticeDAO.setAddFile(boardFileDTO);
+			
+		}
+		
+		/*for(MultipartFile mf : files) { // 전달 받은 파일에 접근
 			if(mf.getSize() != 0) {	// 파일 객체 안에 값이 존재하면
 				// 파일 경로 /resources/upload/notice
 				
@@ -161,7 +181,7 @@ public class NoticeService implements BoardService {
 				boardFileDTO.setFileName(fileName);
 				boardFileDTO.setOriName(mf.getOriginalFilename());
 				boardFileDTO.setNum(boardDTO.getNum());
-				noticeDAO.setAddFile(boardFileDTO);
+				noticeDAO.setAddFile(boardFileDTO);*/
 				
 				/**
 				 * 주말 할일 : Notice, Qna 파일 관련 완성 (DB 테이블 포함, sqldeveloper 참고) + 가능하면 BankBook까지
@@ -170,8 +190,8 @@ public class NoticeService implements BoardService {
 				 * BankMembers, Notice, Qna, Bankbook 다 파일 업로드 필요한데 공통 코드를 어떻게 처리할지
 				 * */
 				
-			}
-		}
+			/*}
+		}*/
 		
 		//return noticeDAO.setAdd(boardDTO);
 		return result;

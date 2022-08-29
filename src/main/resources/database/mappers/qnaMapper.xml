@@ -37,9 +37,32 @@
 				WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="getDetail" parameterType="BoardDTO" resultType="QnaDTO">
-		SELECT * FROM qna WHERE num = #{num}
+	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
+		SELECT Q.*, QF.* 
+		FROM qna Q
+		LEFT JOIN qnafile QF
+		ON (Q.num = QF.num)
+		WHERE Q.num = #{num}
 	</select>
+	
+	<resultMap type="QnaDTO" id="getDetailResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="contents" property="contents"/>
+		<result column="writer" property="writer"/>
+		<result column="regdate" property="regDate"/>
+		<result column="hit" property="hit"/>
+		<result column="ref" property="ref"/>
+		<result column="step" property="step"/>
+		<result column="depth" property="depth"/>
+		
+		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+			<id column="filenum" property="fileNum"/>
+			<result column="filename" property="fileName"/>
+			<result column="oriname" property="oriName"/>
+		</collection>
+		
+	</resultMap>
 	
 	<insert id="setAdd" parameterType="BoardDTO">
 		<!-- keyProperty = parameterType의 동일한 이름의 setter를 호출해 대응되는 멤버에 값 세팅 -->
@@ -64,5 +87,9 @@
 		SELECT COUNT(num) FROM qna
 			<include refid="search"></include>
 	</select>
+	
+	<insert id="setAddFile" parameterType="BoardFileDTO">
+		INSERT INTO qnafile VALUES (FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
 	
 </mapper>

@@ -2,11 +2,16 @@ package kr.co.practice.board.qna;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.practice.board.impl.BoardDTO;
+import kr.co.practice.board.impl.BoardFileDTO;
 import kr.co.practice.board.impl.BoardService;
+import kr.co.practice.util.FileManager;
 import kr.co.practice.util.Pager;
 
 @Service
@@ -14,6 +19,9 @@ public class QnaService implements BoardService {
 	
 	@Autowired
 	private QnaDAO qnaDAO;
+	
+	@Autowired
+	private FileManager fileManager;
 	
 	//공통적인 것이 아니라 QNA의 고유한 메서드이므로 부모에서 선언하지말고 별도로 선언
 	public int setReply(QnaDTO qnaDTO) throws Exception {
@@ -48,11 +56,28 @@ public class QnaService implements BoardService {
 	}
 
 	@Override
-	public int setAdd(BoardDTO boardDTO) throws Exception {
+	public int setAdd(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception {
 		
 		System.out.println("Insert 전 : " + boardDTO.getNum());
 		int result = qnaDAO.setAdd(boardDTO);
 		System.out.println("Insert 후 : " + boardDTO.getNum());
+		
+		String path = "resources/upload/qna";
+		
+		for(MultipartFile multipartFile : files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.saveFile(servletContext, path, multipartFile);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFileDTO.setNum(boardDTO.getNum());
+			
+			qnaDAO.setAddFile(boardFileDTO);
+		}
+		
 		return result;
 	}
 

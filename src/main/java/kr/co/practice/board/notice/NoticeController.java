@@ -2,6 +2,8 @@ package kr.co.practice.board.notice;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -62,8 +64,8 @@ public class NoticeController {
 		return "board/add";
 	}
 	@RequestMapping(value = "add.iu", method = RequestMethod.POST)
-	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
-		int result = noticeService.setAdd(boardDTO, files);
+	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
+		int result = noticeService.setAdd(boardDTO, files, session.getServletContext());
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("redirect:./list.iu");
 		//ModelAndView로도 redirect 가능, 근데 굳이;;;;

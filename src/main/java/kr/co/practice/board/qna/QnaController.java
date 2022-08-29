@@ -2,6 +2,8 @@ package kr.co.practice.board.qna;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.practice.board.impl.BoardDTO;
@@ -69,8 +72,8 @@ public class QnaController {
 		return "board/add";
 	}
 	@RequestMapping(value = "add.iu", method = RequestMethod.POST)
-	public String setAdd(BoardDTO boardDTO) throws Exception {
-		int result = qnaService.setAdd(boardDTO);
+	public String setAdd(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
+		int result = qnaService.setAdd(boardDTO, files, session.getServletContext());
 		
 		return "redirect:./list.iu";
 	}
