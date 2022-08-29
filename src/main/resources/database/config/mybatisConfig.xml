@@ -19,5 +19,6 @@
 		<typeAlias type="kr.co.practice.util.Pager" alias="Pager"/>
 		<typeAlias type="kr.co.practice.file.FileDTO" alias="FileDTO"/>
 		<typeAlias type="kr.co.practice.bankmembers.BankMembersFileDTO" alias="BankMembersFileDTO"/>
+		<typeAlias type="kr.co.practice.board.impl.BoardFileDTO" alias="BoardFileDTO"/>
 	</typeAliases>
 </configuration>

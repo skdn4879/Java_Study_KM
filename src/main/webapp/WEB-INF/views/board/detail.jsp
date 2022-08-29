@@ -51,6 +51,14 @@
 		<div class="row mt-4">
 			<a href="./reply.iu?num=${requestScope.boardDTO.num }" class="btn btn-danger">Reply</a>
 		</div>
+		<c:forEach items="${boardDTO.boardFileDTOs}" var="fileDTO">
+			<div class="row">
+				<p>
+				<a href="../resources/upload/${board}/${fileDTO.fileName}">${fileDTO.oriName}</a>
+				<img alt="" src="../resources/upload/${board}/${fileDTO.fileName}">
+				</p>
+			</div>
+		</c:forEach>
 		
 	</section>
 	

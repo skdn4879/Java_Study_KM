@@ -22,12 +22,33 @@
 			) WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
-	<select id="getDetail" parameterType="BoardDTO" resultType="NoticeDTO">
-		SELECT * FROM notice WHERE num = #{num}
+	<select id="getDetail" parameterType="BoardDTO" resultMap="getDetailResult">
+		SELECT N.*, NF.* 
+		FROM notice N
+		LEFT JOIN noticefile NF
+		ON(N.num = NF.num)
+		WHERE N.num = #{num}
 	</select>
 	
+	<resultMap type="NoticeDTO" id="getDetailResult">
+		<id column="num" property="num"/>
+		<result column="title" property="title"/>
+		<result column="contents" property="contents"/>
+		<result column="writer" property="writer"/>
+		<result column="regdate" property="regDate"/>
+		<result column="hit" property="hit"/>
+		<collection property="boardFileDTOs" javaType="List" ofType="BoardFileDTO">
+			<id column="filenum" property="fileNum"/>
+			<result column="filename" property="fileName"/>
+			<result column="oriname" property="oriName"/>
+		</collection>
+	</resultMap>
+	
 	<insert id="setAdd" parameterType="BoardDTO">
-		INSERT INTO notice(title, contents, writer) VALUES(#{title}, #{contents}, #{writer})
+		<selectKey order="BEFORE" keyProperty="num" resultType="Long">
+			SELECT BOARD_SEQ.NEXTVAL FROM DUAL
+		</selectKey>
+		INSERT INTO notice(num, title, contents, writer) VALUES(#{num}, #{title}, #{contents}, #{writer})
 	</insert>
 	
 	<update id="setUpdate" parameterType="BoardDTO">
@@ -49,5 +70,9 @@
 				</choose>
 				LIKE '%' || #{search} || '%'
 	</select>
+	
+	<insert id="setAddFile" parameterType="BoardFileDTO">
+		INSERT INTO noticefile VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
+	</insert>
 	
 </mapper>

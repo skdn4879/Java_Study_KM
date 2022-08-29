@@ -27,5 +27,8 @@ public interface BoardDAO {
 	
 	//글의 총 개수
 	public Long getCount(Pager pager) throws Exception;
+	
+	//파일 insert
+	public int setAddFile(BoardFileDTO boardFileDTO) throws Exception;
 
 }

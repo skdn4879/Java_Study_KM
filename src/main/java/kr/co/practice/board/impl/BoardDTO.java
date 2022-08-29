@@ -1,6 +1,7 @@
 package kr.co.practice.board.impl;
 
 import java.sql.Date;
+import java.util.List;
 
 public class BoardDTO {
 	
@@ -10,6 +11,7 @@ public class BoardDTO {
 	private String writer;
 	private Date regDate;
 	private Long hit;
+	private List<BoardFileDTO> boardFileDTOs;
 	
 	public BoardDTO() {}
 	
@@ -48,6 +50,14 @@ public class BoardDTO {
 	}
 	public void setHit(Long hit) {
 		this.hit = hit;
+	}
+
+	public List<BoardFileDTO> getBoardFileDTOs() {
+		return boardFileDTOs;
+	}
+
+	public void setBoardFileDTOs(List<BoardFileDTO> boardFileDTOs) {
+		this.boardFileDTOs = boardFileDTOs;
 	}
 
 }

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.practice.board.impl.BoardDTO;
+import kr.co.practice.board.impl.BoardFileDTO;
 import kr.co.practice.board.impl.BoardService;
 import kr.co.practice.util.Pager;
 
@@ -127,6 +128,8 @@ public class NoticeService implements BoardService {
 	@Override
 	public int setAdd(BoardDTO boardDTO, MultipartFile[] files) throws Exception {
 		
+		int result = noticeDAO.setAdd(boardDTO);
+		
 		for(MultipartFile mf : files) { // 전달 받은 파일에 접근
 			if(mf.getSize() != 0) {	// 파일 객체 안에 값이 존재하면
 				// 파일 경로 /resources/upload/notice
@@ -154,6 +157,11 @@ public class NoticeService implements BoardService {
 				System.out.println(fileName);
 				
 				// 실제 DB 저장
+				BoardFileDTO boardFileDTO = new BoardFileDTO();
+				boardFileDTO.setFileName(fileName);
+				boardFileDTO.setOriName(mf.getOriginalFilename());
+				boardFileDTO.setNum(boardDTO.getNum());
+				noticeDAO.setAddFile(boardFileDTO);
 				
 				/**
 				 * 주말 할일 : Notice, Qna 파일 관련 완성 (DB 테이블 포함, sqldeveloper 참고) + 가능하면 BankBook까지
@@ -166,7 +174,7 @@ public class NoticeService implements BoardService {
 		}
 		
 		//return noticeDAO.setAdd(boardDTO);
-		return 0;
+		return result;
 	}
 
 	@Override
