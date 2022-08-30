@@ -32,19 +32,21 @@
 	
 	<section class="container-fluid col-lg-4 mt-4">
 		<div class="row">
-			<form method="post" action="login">
+			<form method="post" action="login" id="frm">
 			    <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
 			
 			    <div class="form-floating">
-			      <input type="text" class="form-control" id="floatingInput" placeholder="ID" name="userName">
-			      <label for="floatingInput">UserName</label>
+			      <input type="text" class="form-control" id="inputId" placeholder="ID" name="userName">
+			      <label for="inputId">UserName</label>
 			    </div>
 			    <div class="form-floating">
-			      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
-			      <label for="floatingPassword">Password</label>
+			      <input type="password" class="form-control" id="inputPw" placeholder="Password" name="password">
+			      <label for="inputPw">Password</label>
 			    </div>
 			
-			    <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+				<span id="comment"></span>
+
+			    <button id="btn" class="w-100 btn btn-lg btn-primary" type="button">Sign in</button>
 			    <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
 			  </form>
 		</div>
@@ -53,5 +55,6 @@
 	<c:import url="../template/footer.jsp"></c:import>
 	
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+	<script src="/resources/js/member.js"></script>
 </body>
 </html>

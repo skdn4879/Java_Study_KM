@@ -16,6 +16,7 @@ public class QnaDAO implements BoardDAO {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	
 	private final String NAMESPACE = "kr.co.practice.board.qna.QnaDAO.";
 	
 	public int setReplyAdd(QnaDTO qnaDTO) throws Exception {
