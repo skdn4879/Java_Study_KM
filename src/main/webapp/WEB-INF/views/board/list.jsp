@@ -120,6 +120,6 @@
 	<c:import url="../template/footer.jsp"></c:import>
 	
 	<c:import url="../template/bootstrapJs.jsp"></c:import>
-	
+	<script src="/resources/js/board.js"></script>
 </body>
 </html>
