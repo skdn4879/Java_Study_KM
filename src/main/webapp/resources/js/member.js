@@ -12,14 +12,14 @@ btn.addEventListener("click", function(){
     let pwLen = inputPw.value;
 
     if(idLen.length == 0){
-        alert("ID는 필수입니다.");
-        //comment.innerHTML("<h5>ID는 필수입니다.</h5>");
+        //alert("ID는 필수입니다.");
+        comment.innerHTML = "<h5>ID는 필수입니다.</h5>";
         return;
     }
 
     if(pwLen.length == 0){
-        alert("PW는 필수입니다.");
-        //comment.innerHTML("<h5>PW는 필수입니다.</h5>");
+        //alert("PW는 필수입니다.");
+        comment.innerHTML = "<h5>PW는 필수입니다.</h5>";
         return;
     }
 

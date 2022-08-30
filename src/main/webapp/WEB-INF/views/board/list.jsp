@@ -32,9 +32,9 @@
 			  <div class="col-12">
 			    <label class="visually-hidden" for="kind">Kind</label>
 			    <select name="kind" class="form-select" id="kind">
-			      <option value="contents">Contents</option>
-			      <option value="title">Title</option>
-			      <option value="writer">Writer</option>
+			      <option class="kinds" value="contents">Contents</option>
+			      <option class="kinds" value="title">Title</option>
+			      <option class="kinds" value="writer">Writer</option>
 			    </select>
 			  </div>
 			
@@ -121,5 +121,16 @@
 	
 	<c:import url="../template/bootstrapJs.jsp"></c:import>
 	<script src="/resources/js/board.js"></script>
+	<script>
+		let k = '${param.kind}';
+		const kinds = document.getElementsByClassName("kinds");
+
+		for(let i = 0; i < kinds.length; i++){
+			if(kinds[i].value == k){
+				kinds[i].selected = true;
+				break;
+			}
+		}
+	</script>
 </body>
 </html>
