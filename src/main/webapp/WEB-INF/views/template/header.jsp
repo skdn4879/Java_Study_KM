@@ -42,7 +42,7 @@
 	                    <a class="nav-link" href="/members/login">로그인</a>
 	                </li>
 	                <li class="nav-item">
-	                    <a class="nav-link" href="/members/join">회원가입</a>
+	                    <a class="nav-link" href="/members/terms.iu">회원가입</a>
 	                </li>
 	                </c:otherwise>
 	                <%-- </c:when> --%>
