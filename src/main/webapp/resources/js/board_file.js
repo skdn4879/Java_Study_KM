@@ -4,6 +4,16 @@ const fileAdd = document.getElementById("fileAdd"); //button
 let fileLimit = 5;
 let fileCount = 0;
 
+let idx = 0;
+
+/*
+<div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">File</span>
+  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+  <button type="button" class="btn btn-danger del">삭제</button>
+</div>
+*/
+
 fileAdd.addEventListener("click", function(){
 
     if(fileCount < fileLimit){
@@ -11,6 +21,9 @@ fileAdd.addEventListener("click", function(){
         let divCla = document.createAttribute("class");
         divCla.value = "input-group mb-3";
         div.setAttributeNode(divCla);
+        let divAttr = document.createAttribute("id");
+        divAttr.value = "file" + idx;
+        div.setAttributeNode(divAttr);
         
         /*let span = document.createElement("span");
         let spanCla = document.createAttribute("class");
@@ -44,14 +57,41 @@ fileAdd.addEventListener("click", function(){
         input.setAttributeNode(aria_describedby);
         input.setAttributeNode(name);
 
+        let button = document.createElement("button");
+        button.setAttribute("type", "button");
+        let buttonCla = document.createAttribute("class");
+        buttonCla.value = "btn btn-danger del";
+        let buttonText = document.createTextNode("삭제");
+        button.appendChild(buttonText);
+        button.setAttributeNode(buttonCla);
+        let buttonAttr = document.createAttribute("title");
+        buttonAttr.value = idx;
+        button.setAttributeNode(buttonAttr);
+
         div.appendChild(span);
         div.appendChild(input);
+        div.appendChild(button);
 
         addFiles.append(div);
 
         fileCount = fileCount + 1;
+        idx = idx + 1;
     } else{
         alert("파일은 5개까지만 추가 가능합니다.");
     }
     
+});
+
+addFiles.addEventListener("click", function(event){
+    /*if(event.target.className == "btn btn-danger del"){
+        alert("삭제 버튼 누름");
+    }*/
+
+    if(event.target.classList[2] == "del"){
+        const fileForm = document.getElementById("file" + event.target.title);
+
+        addFiles.removeChild(fileForm);
+
+        fileCount = fileCount - 1;
+    }
 });
