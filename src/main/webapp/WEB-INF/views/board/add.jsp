@@ -36,20 +36,24 @@
 				  <textarea class="form-control" aria-label="With textarea" name="contents" id="contents"></textarea>
 				</div>
 				
-				<div class="input-group mb-3">
-				  <span class="input-group-text" id="basic-addon1">File</span>
-				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
-				</div>
-				<div class="input-group mb-3">
-				  <span class="input-group-text" id="basic-addon1">File</span>
-				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
-				</div>
-				<div class="input-group mb-3">
-				  <span class="input-group-text" id="basic-addon1">File</span>
-				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+				<div id="addFiles">
+					<button type="button" class="btn btn-danger" id="fileAdd">파일 추가</button>
 				</div>
 				
-				<input class="btn btn-primary" type="submit" value="${requestScope.board } 작성">
+				<!-- <div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">File</span>
+				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">File</span>
+				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+				</div>
+				<div class="input-group mb-3">
+				  <span class="input-group-text" id="basic-addon1">File</span>
+				  <input type="file" class="form-control" aria-label="Username" aria-describedby="basic-addon1" name="files">
+				</div> -->
+				
+				<input class="btn btn-primary mt-4" type="submit" value="${requestScope.board } 작성">
 			</form>
 		</div>
 	</section>
@@ -58,6 +62,7 @@
 	
 	<c:import url="../template/bootstrapJs.jsp"></c:import>
 	
+	<script src="../resources/js/board_file.js"></script>
 	<script type="text/javascript">
 		$("#contents").summernote();
 	</script>
