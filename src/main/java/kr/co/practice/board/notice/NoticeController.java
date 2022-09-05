@@ -67,7 +67,19 @@ public class NoticeController {
 	public ModelAndView setAdd(BoardDTO boardDTO, MultipartFile[] files, HttpSession session) throws Exception {
 		int result = noticeService.setAdd(boardDTO, files, session.getServletContext());
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:./list.iu");
+		
+		String message = "실패";
+		String url = "./list.iu";
+		if(result == 1) {
+			message = "성공";
+		}
+		
+		mv.addObject("result", result);
+		mv.addObject("message", message);
+		mv.addObject("url", url);
+		mv.setViewName("common/result");
+		
+		//mv.setViewName("redirect:./list.iu");
 		//ModelAndView로도 redirect 가능, 근데 굳이;;;;
 		
 		return mv;
