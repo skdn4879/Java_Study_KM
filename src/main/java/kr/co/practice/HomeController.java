@@ -29,7 +29,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
+		/*logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -38,7 +38,13 @@ public class HomeController {
 		
 		System.out.println(sqlSession);
 		
-		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("serverTime", formattedDate );*/
+		
+		/*try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}*/
 		
 		return "index";
 	}
