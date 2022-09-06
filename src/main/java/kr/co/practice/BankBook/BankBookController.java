@@ -5,9 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.practice.util.CommentPager;
+import kr.co.practice.util.Pager;
 
 @Controller
 @RequestMapping(value = "/bankbook/*")
@@ -15,6 +21,39 @@ public class BankBookController {
 	
 	@Autowired
 	private BankBookService bankBookService;
+	
+	//----------------------------------------------------------------------
+	
+	// 1. JSP에 출력하고 결과물을 응답으로 전송
+	// 2. JSON을 응답으로 전송(jackson-databind 라이브러리 사용)
+	@GetMapping("commentList")
+	@ResponseBody
+	public List<BankBookCommentDTO> commentList(CommentPager commentPager) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<BankBookCommentDTO> list = bankBookService.getCommentList(commentPager);
+		
+		/*mv.addObject("commentList", list);
+		mv.setViewName("common/commentList");*/
+		
+		// json
+		// DTO = {}
+		// num = 1, {"num" : "1", "bookNum" : "123", "writer" : "lemon"}
+		// [{}]
+		
+		return list;
+	}
+	
+	@PostMapping("commentAdd")
+	@ResponseBody	// return되는 데이터를 view로 보내지않고 바로 응답으로 보내는 annotation
+	public String commentAdd(BankBookCommentDTO bankBookCommentDTO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		int result = bankBookService.setCommentAdd(bankBookCommentDTO);
+		//{"key" : "value"}
+		String jsonResult = "{\"result\" : \"" + result + "\"}";
+		return jsonResult;
+	}
+	
+	//----------------------------------------------------------------------
 	
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public ModelAndView list() throws Exception {

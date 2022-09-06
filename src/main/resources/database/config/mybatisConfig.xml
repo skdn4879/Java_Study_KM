@@ -21,5 +21,6 @@
 		<typeAlias type="kr.co.practice.bankmembers.BankMembersFileDTO" alias="BankMembersFileDTO"/>
 		<typeAlias type="kr.co.practice.board.impl.BoardFileDTO" alias="BoardFileDTO"/>
 		<typeAlias type="kr.co.practice.BankBook.BankBookCommentDTO" alias="BankBookCommentDTO"/>
+		<typeAlias type="kr.co.practice.util.CommentPager" alias="CommentPager"/>
 	</typeAliases>
 </configuration>

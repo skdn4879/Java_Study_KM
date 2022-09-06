@@ -64,15 +64,41 @@
 			  </tbody>
 			</table>
 		</div>
+		<div class="row">
+			<a class="btn btn-primary" href="./update?bookNum=${requestScope.bookDetail.bookNum }" role="button">통장 정보 수정</a>
+			<a class="btn btn-danger" href="./delete?bookNum=${requestScope.bookDetail.bookNum }" role="button">통장 정보 삭제</a>
+		</div>
 	</section>
 	
-	<br>
-	<a class="btn btn-primary" href="./update?bookNum=${requestScope.bookDetail.bookNum }" role="button">통장 정보 수정</a>
-	<a class="btn btn-danger" href="./delete?bookNum=${requestScope.bookDetail.bookNum }" role="button">통장 정보 삭제</a>
+
+	
+	<!-- Comment -->
+	
+	<section class="container-fluid col-lg-8 mt-4">
+		<div class = "row">
+			<div class="input-group mb-3">
+			  <span class="input-group-text" id="basic-addon1">Writer</span>
+			  <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1" name="writer" id="writer">
+			</div>
+			<div class="input-group mb-3">
+			  <span class="input-group-text" id="basic-addon1">Contents</span>
+			  <input type="text" class="form-control" placeholder="Contents" aria-label="Username" aria-describedby="basic-addon1" name="contents" id="contents">
+			</div>
+			<button class="btn btn-success" type="button" id="commentSendBtn" data-booknum="${requestScope.bookDetail.bookNum }">댓글 작성</button>
+		</div>
+	</section>
+	
+	<section class="container-fluid col-lg-8 mt-4">
+		<div class="row" id="commentList">
+			
+		</div>
+	</section>
+	
+	<!-- Comment -->
 	
 	<c:import url="../template/footer.jsp"></c:import>
 	
 	<c:import url="../template/bootstrapJs.jsp"></c:import>
-	
+	<script type="text/javascript" src="/resources/js/bankBookComment.js"></script>
 </body>
 </html>

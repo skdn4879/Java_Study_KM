@@ -5,12 +5,21 @@
 		    
 <mapper namespace="kr.co.practice.BankBook.BankBookCommentDAO">
 
-	<select id="getList" parameterType="Pager" resultType="BankBookCommentDTO">
-		SELECT * FROM bb_comment ORDER BY num DESC
+	<select id="getCommentList" parameterType="CommentPager" resultType="BankBookCommentDTO">
+		SELECT * FROM
+	    (
+	        SELECT ROWNUM R, C.*
+	        FROM 
+	        (
+	            SELECT * FROM bb_comment
+	            WHERE booknum = #{bookNum}
+	            ORDER BY num DESC
+	        ) C
+	    ) WHERE R BETWEEN #{startRow} AND #{lastRow}
 	</select>
 	
 	<insert id="setCommentAdd" parameterType="BankBookCommentDTO">
-		INSERT INTO bb_comment(num, booknum, writer, contents, regdate) VALUES(BOARD_SEQ.NEXTVAL, #{booknum}, #{writer}, #{contents}, sysdate)
+		INSERT INTO bb_comment(num, booknum, writer, contents, regdate) VALUES(BOARD_SEQ.NEXTVAL, #{bookNum}, #{writer}, #{contents}, sysdate)
 	</insert>
 
 </mapper>

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.web.WebAppConfiguration;
 
 import kr.co.practice.MyAbstractTest;
 import kr.co.practice.BankBook.BankBookCommentDAO;
@@ -14,7 +15,7 @@ public class BankBookCommentDAOTest extends MyAbstractTest {
 	@Autowired
 	private BankBookCommentDAO bankBookCommentDAO;
 	
-	@Test
+	/*@Test
 	public void setCommentAddTest() throws Exception {
 		BankBookCommentDTO bankBookCommentDTO = new BankBookCommentDTO();
 		bankBookCommentDTO.setBookNum(1660898871272L);
@@ -23,6 +24,6 @@ public class BankBookCommentDAOTest extends MyAbstractTest {
 		
 		int result = bankBookCommentDAO.setCommentAdd(bankBookCommentDTO);
 		assertEquals(1, result);
-	}
+	}*/
 	
 }
