@@ -8,5 +8,9 @@
 	<select id="getList" parameterType="Pager" resultType="BankBookCommentDTO">
 		SELECT * FROM bb_comment ORDER BY num DESC
 	</select>
+	
+	<insert id="setCommentAdd" parameterType="BankBookCommentDTO">
+		INSERT INTO bb_comment(num, booknum, writer, contents, regdate) VALUES(BOARD_SEQ.NEXTVAL, #{booknum}, #{writer}, #{contents}, sysdate)
+	</insert>
 
 </mapper>

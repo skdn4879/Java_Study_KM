@@ -20,4 +20,8 @@ public class BankBookCommentDAO {
 		return sqlSession.selectList(NAMESPACE + "getList");
 	}
 	
+	public int setCommentAdd(BankBookCommentDTO bankBookCommentDTO) throws Exception {
+		return sqlSession.insert(NAMESPACE + "setCommentAdd", bankBookCommentDTO);
+	}
+	
 }
