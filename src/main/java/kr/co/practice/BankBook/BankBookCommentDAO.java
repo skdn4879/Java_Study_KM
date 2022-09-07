@@ -17,6 +17,14 @@ public class BankBookCommentDAO {
 	
 	private String NAMESPACE = "kr.co.practice.BankBook.BankBookCommentDAO.";
 	
+	public int setCommentDelete(BankBookCommentDTO bankBookCommentDTO) throws Exception {
+		return sqlSession.delete(NAMESPACE + "setCommentDelete", bankBookCommentDTO);
+	}
+	
+	public Long getCommentListTotalCount(CommentPager commentPager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE + "getCommentListTotalCount", commentPager);
+	}
+	
 	public List<BankBookCommentDTO> getCommentList(CommentPager commentPager) throws Exception {
 		return sqlSession.selectList(NAMESPACE + "getCommentList", commentPager);
 	}

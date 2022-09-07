@@ -7,6 +7,15 @@ public class CommentPager {
 	private Long bookNum;
 	private Long page;
 	private Long perPage;
+	private Long totalPage;
+	
+	//전체 페이지 개수 계산
+	public void makePage(Long totalCount) {
+		this.totalPage = totalCount / this.getPerPage();
+		if(totalCount % this.getPerPage() != 0) {
+			this.totalPage++;
+		}
+	}
 	
 	public void getRowNum() {
 		this.startRow = (this.getPage() - 1) * this.getPerPage() + 1;
@@ -48,6 +57,14 @@ public class CommentPager {
 	}
 	public void setPage(Long page) {
 		this.page = page;
+	}
+
+	public Long getTotalPage() {
+		return totalPage;
+	}
+
+	public void setTotalPage(Long totalPage) {
+		this.totalPage = totalPage;
 	}
 	
 }

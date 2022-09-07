@@ -5,6 +5,14 @@
 		    
 <mapper namespace="kr.co.practice.BankBook.BankBookCommentDAO">
 
+	<delete id="setCommentDelete" parameterType="BankBookCommentDTO">
+		DELETE FROM bb_comment WHERE num = #{num}
+	</delete>
+
+	<select id="getCommentListTotalCount" parameterType="CommentPager" resultType="Long">
+		SELECT COUNT(num) T FROM bb_comment WHERE booknum = #{bookNum}
+	</select>
+
 	<select id="getCommentList" parameterType="CommentPager" resultType="BankBookCommentDTO">
 		SELECT * FROM
 	    (

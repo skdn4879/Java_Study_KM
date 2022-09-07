@@ -1,6 +1,8 @@
 package kr.co.practice.BankBook;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,11 +26,20 @@ public class BankBookController {
 	
 	//----------------------------------------------------------------------
 	
+	@PostMapping("commentDelete")
+	@ResponseBody
+	public Map<String, Integer> commentDelete(BankBookCommentDTO bankBookCommentDTO) throws Exception {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		int result = bankBookService.setCommentDelete(bankBookCommentDTO);
+		map.put("result", result);
+		return map;
+	}
+	
 	// 1. JSP에 출력하고 결과물을 응답으로 전송
 	// 2. JSON을 응답으로 전송(jackson-databind 라이브러리 사용)
 	@GetMapping("commentList")
 	@ResponseBody
-	public List<BankBookCommentDTO> commentList(CommentPager commentPager) throws Exception{
+	public Map<String, Object> commentList(CommentPager commentPager) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		List<BankBookCommentDTO> list = bankBookService.getCommentList(commentPager);
 		
@@ -39,8 +50,11 @@ public class BankBookController {
 		// DTO = {}
 		// num = 1, {"num" : "1", "bookNum" : "123", "writer" : "lemon"}
 		// [{}]
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("list", list);
+		map.put("pager", commentPager);
 		
-		return list;
+		return map;
 	}
 	
 	@PostMapping("commentAdd")

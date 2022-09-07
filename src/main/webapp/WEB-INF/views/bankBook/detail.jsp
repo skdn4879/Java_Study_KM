@@ -92,9 +92,39 @@
 		<div class="row" id="commentList">
 			
 		</div>
+		<button class="btn btn-primary" id="moreBtn">더보기</button>
 	</section>
 	
 	<!-- Comment -->
+	
+	<button id="commentUpdateBtn" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" style="display: none;">Open modal for @getbootstrap</button>
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">Update Comment</h5>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	          <div class="mb-3">
+	            <label for="recipient-name" class="col-form-label">Writer:</label>
+	            <input type="text" class="form-control" id="recipient-name">
+	          </div>
+	          <div class="mb-3">
+	            <label for="message-text" class="col-form-label">Contents:</label>
+	            <textarea class="form-control" id="message-text"></textarea>
+	          </div>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Update</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 	
 	<c:import url="../template/footer.jsp"></c:import>
 	
