@@ -46,6 +46,8 @@ public class HomeController {
 			e.printStackTrace();
 		}*/
 		
+		System.out.println("HomeController");
+		
 		return "index";
 	}
 	
