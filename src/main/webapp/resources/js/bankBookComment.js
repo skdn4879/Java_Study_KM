@@ -94,8 +94,19 @@ function getCommentList(p, bn, dFlag){
                 td.innerHTML = list[i].writer;
                 tr.appendChild(td);
 
+                // 날짜
                 td = document.createElement("td");
+
+                /*let date = new Date(list[i].regDate);
+                //console.log(date);
+                let year = date.getFullYear();
+                let month = date.getMonth() + 1;
+                let d = date.getDate();
+                //console.log(year, month, d);
+                let tdText = document.createTextNode(year + "-" + month + "-" + d);*/
+
                 td.innerHTML = list[i].regDate;
+                //td.appendChild(tdText);
                 tr.appendChild(td);
 
                 td = document.createElement("td");
@@ -162,7 +173,17 @@ commentList.addEventListener("click", function(event){
         let v = contents.innerHTML;
         contents.innerHTML = "<textarea>" + v + "</textarea>";*/
 
+        const contents = event.target.previousSibling.previousSibling.previousSibling.innerHTML;
+        document.querySelector("#updateContents").value = contents;
+
+        const writer = event.target.previousSibling.previousSibling.innerHTML;
+        document.querySelector("#updateWriter").value = writer;
+
+        const num = event.target.getAttribute("data-num");
+        document.querySelector("#num").value = num;
+
         document.querySelector("#commentUpdateBtn").click();
+        
 
     } else if (event.target.className == 'delete'){
         
@@ -189,4 +210,31 @@ commentList.addEventListener("click", function(event){
             }
         }
     }
+});
+
+const sendUpdateBtn = document.querySelector("#sendUpdateBtn");
+sendUpdateBtn.addEventListener("click", function(){
+    const num = document.querySelector("#num").value;
+    const contents = document.querySelector("#updateContents").value;
+    const writer = document.querySelector("#updateWriter").value;
+
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "./commentUpdate");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("num=" + num + "&contents=" + contents + "&writer=" + writer);
+    xhttp.onreadystatechange = function(){
+        if(this.readyState == 4 && this.status == 200){
+            let result = this.responseText.trim();
+
+            if(result == 1){
+                alert("댓글 수정 성공");
+                
+                page = 1;
+                getCommentList(page, bookNum, true);
+            } else{
+                alert("댓글 수정 실패");
+            }
+        }
+    }
+
 });

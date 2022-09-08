@@ -108,19 +108,20 @@
 	      </div>
 	      <div class="modal-body">
 	        <form>
+	          <input type="hidden" name="num" id="num">
 	          <div class="mb-3">
 	            <label for="recipient-name" class="col-form-label">Writer:</label>
-	            <input type="text" class="form-control" id="recipient-name">
+	            <input type="text" class="form-control" id="updateWriter" name="writer">
 	          </div>
 	          <div class="mb-3">
 	            <label for="message-text" class="col-form-label">Contents:</label>
-	            <textarea class="form-control" id="message-text"></textarea>
+	            <textarea class="form-control" id="updateContents" name="contents"></textarea>
 	          </div>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Update</button>
+	        <button type="button" class="btn btn-primary" id="sendUpdateBtn" data-bs-dismiss="modal">Update</button>
 	      </div>
 	    </div>
 	  </div>

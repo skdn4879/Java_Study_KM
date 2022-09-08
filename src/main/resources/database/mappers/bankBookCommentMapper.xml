@@ -5,6 +5,10 @@
 		    
 <mapper namespace="kr.co.practice.BankBook.BankBookCommentDAO">
 
+	<update id="setCommentUpdate" parameterType="BankBookCommentDTO">
+		UPDATE bb_comment SET contents = #{contents}, writer = #{writer} WHERE num = #{num}
+	</update>
+
 	<delete id="setCommentDelete" parameterType="BankBookCommentDTO">
 		DELETE FROM bb_comment WHERE num = #{num}
 	</delete>

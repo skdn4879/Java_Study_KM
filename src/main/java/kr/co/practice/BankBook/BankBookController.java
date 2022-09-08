@@ -26,6 +26,13 @@ public class BankBookController {
 	
 	//----------------------------------------------------------------------
 	
+	@PostMapping("commentUpdate")
+	@ResponseBody
+	public int commentUpdate(BankBookCommentDTO bankBookCommentDTO) throws Exception {
+		int result = bankBookService.setCommentUpdate(bankBookCommentDTO);
+		return result;
+	}
+	
 	@PostMapping("commentDelete")
 	@ResponseBody
 	public Map<String, Integer> commentDelete(BankBookCommentDTO bankBookCommentDTO) throws Exception {
