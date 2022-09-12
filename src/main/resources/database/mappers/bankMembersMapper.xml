@@ -5,6 +5,10 @@
 		    
 <mapper namespace="kr.co.practice.bankmembers.BankMembersDAO">
 
+	<select id="getJoinIdOverlap" parameterType="BankMembersDTO" resultType="BankMembersDTO">
+		SELECT username FROM bankmembers WHERE username = #{userName}
+	</select>
+
 	<insert id="setAddFile" parameterType="BankMembersFileDTO">
 		INSERT INTO memberfile(filenum, username, filename, oriname) VALUES(FILE_SEQ.NEXTVAL, #{userName}, #{fileName}, #{oriName})
 	</insert>

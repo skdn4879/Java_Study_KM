@@ -4,6 +4,8 @@ import java.util.List;
 
 public interface MembersDAO {
 	
+	public BankMembersDTO getJoinIdOverlap(BankMembersDTO bankMembersDto) throws Exception;
+	
 	//bankMembers 테이블 회원가입
 	public int setJoin(BankMembersDTO bankMembersDto) throws Exception;
 		

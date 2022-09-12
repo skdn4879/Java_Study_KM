@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,6 +25,12 @@ public class BankMembersController {
 	
 	@Autowired
 	private BankAccountService bankAccountService;
+	
+	@GetMapping("joinidoverlap")
+	@ResponseBody
+	public int joinIdOverlapCheck(BankMembersDTO bankMembersDto) throws Exception {
+		return bankMembersService.getJoinIdOverlap(bankMembersDto);
+	}
 	
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public void login() {

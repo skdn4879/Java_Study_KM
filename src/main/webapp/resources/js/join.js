@@ -3,14 +3,35 @@ const msgUserName = document.getElementById("msgUserName");
 const userName = document.getElementById("userName");
 const userNameMinLimit = 2;
 let userNameCheck = false;
+let userNameOverlapCheck = false;
 
 userName.addEventListener("blur", function(){
-    if(userName.value.length < userNameMinLimit){
+    let joinId = userName.value;
+    if(joinId.length < userNameMinLimit){
         msgUserName.innerHTML = '<h6 style="color:red;"> 2글자 이상 작성하세요.</h6>';
         userNameCheck = false;
     } else{
         msgUserName.innerHTML = "";
         userNameCheck = true;
+    }
+
+    if(userNameCheck){
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("GET", "./joinidoverlap?userName=" + joinId);
+        xhttp.send();
+        xhttp.onreadystatechange = function(){
+            if(this.readyState == 4 && this.status == 200){
+                let result = this.responseText.trim();
+                
+                if(result == 1){
+                    userNameOverlapCheck = false;
+                    msgUserName.innerHTML = '<h6 style="color:red;"> 중복된 아이디입니다.</h6>';
+                } else{
+                    userNameOverlapCheck = true;
+                    msgUserName.innerHTML = "";
+                }
+            }
+        }
     }
 });
 
@@ -123,6 +144,10 @@ btnSign.addEventListener("click", function(){
 
     if(!userNameCheck){
         alert("UserName을 양식에 맞게 입력해주세요.");
+        return;
+    }
+    if(!userNameOverlapCheck){
+        alert("UserName이 중복됩니다.");
         return;
     }
     if(!passwordFlag){

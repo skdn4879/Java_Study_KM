@@ -30,6 +30,17 @@ public class BankMembersService {
 	// application 내장객체는 Tomcat이 실행될 때 만들어지므로
 	// Service 객체보다 먼저 생성되므로 가져올 수 있다.
 	
+	public int getJoinIdOverlap(BankMembersDTO bankMembersDto) throws Exception {
+		bankMembersDto = bankMembersDAO.getJoinIdOverlap(bankMembersDto);
+		int result = 0;
+		
+		if(bankMembersDto != null) {
+			result = 1;
+		}
+		
+		return result;
+	}
+	
 	//bankMembers 테이블 회원가입
 	public int setJoin(BankMembersDTO bankMembersDto, MultipartFile photo) throws Exception {
 		

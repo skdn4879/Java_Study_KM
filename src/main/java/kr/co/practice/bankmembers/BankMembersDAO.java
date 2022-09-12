@@ -13,6 +13,12 @@ public class BankMembersDAO implements MembersDAO {
 	private SqlSession sqlSession;
 	private final String NAMESPACE = "kr.co.practice.bankmembers.BankMembersDAO.";
 	
+	@Override
+	public BankMembersDTO getJoinIdOverlap(BankMembersDTO bankMembersDto) throws Exception {
+		
+		return sqlSession.selectOne(NAMESPACE + "getJoinIdOverlap", bankMembersDto);
+	}
+	
 	public int setAddFile(BankMembersFileDTO bankMembersFileDTO) throws Exception {
 		return sqlSession.insert(NAMESPACE + "setAddFile", bankMembersFileDTO);
 	}
