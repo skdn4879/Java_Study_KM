@@ -24,32 +24,26 @@
 	<!-- Interceptor 설정 -->
 	<!-- Interceptor 객체 생성 -->
 	<!-- 객체를 생성하고 참조하는 방법일 경우 -->
-	<beans:bean class="kr.co.practice.interceptor.TestInterceptor" id="testInterceptor"></beans:bean>
+	<beans:bean class="kr.co.practice.interceptor.AdminCheckInterceptor" id="adminCheckInterceptor"></beans:bean>
+	<beans:bean class="kr.co.practice.interceptor.MemberInterceptor" id="memberInterceptor"></beans:bean>
 	
 	<!-- URL - Interceptor 매핑 -->
 	<interceptors>
-		<interceptor>
-			<!-- URL 경로 -->
-			<!-- mapping beans 순서 변경하면 안됨 -->
-			<mapping path="/**"/> <!-- root로 시작하는 모든 경로 -->
-			<beans:ref bean="testInterceptor"/> <!-- Interceptor 지정 -->
-		</interceptor>
 		
 		<interceptor>
-			<mapping path="/qna/*"/>
-			<mapping path="/members/myPage"/>
-			<!-- 제외할 URL -->
+			<mapping path="/notice/**"/>
+			<mapping path="/qna/**"/>
+			<exclude-mapping path="/notice/list.iu"/>
+			<exclude-mapping path="/notice/detail.iu"/>
 			<exclude-mapping path="/qna/list.iu"/>
-			<!-- 즉석에서 생성하여 사용하는 경우, 여러군데에서 사용 불가 -->
-			<beans:bean class="kr.co.practice.interceptor.MemberInterceptor" id="memberInterceptor"></beans:bean>
+			<beans:ref bean="memberInterceptor"/>
 		</interceptor>
-		<!-- URL 매핑이 겹치면 겹치는 Interceptor 모두 실행(선언된 순서대로) -->
-		<!-- myPage로 가면 testInterceptor 실행 후 true 리턴 시 memberInterceptor 실행 -->
 		
 		<interceptor>
-			<mapping path="/qna/update.iu"/>
-			<mapping path="/notice/update.iu"/>
-			<beans:bean class="kr.co.practice.interceptor.WriterCheckInterceptor" id="writerCheckInterceptor"></beans:bean>
+			<mapping path="/notice/**"/>
+			<exclude-mapping path="/notice/list.iu"/>
+			<exclude-mapping path="/notice/detail.iu"/>
+			<beans:ref bean="adminCheckInterceptor"/>
 		</interceptor>
 		
 	</interceptors>

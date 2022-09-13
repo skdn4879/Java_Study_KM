@@ -185,6 +185,26 @@
 			<!-- 서버의 우리 프로젝트 경로 안에 실제로 파일이 저장되어 있으니 가져온다. -->
 			<img alt="" src="../resources/upload/member/${memberDto.bankMembersFileDTO.fileName }"/>
 		</div>
+		
+		<div class="row">
+			<table class="table table-info">
+				<thead>
+					<tr>
+						<th scope="col">RoleName</th>
+					</tr>
+				</thead>
+				<tbody class="table-group-divider">
+					<c:forEach items="${sessionScope.member.roleDTOs }" var="roleDTO">
+						<tr>
+							<td>${roleDTO.roleName }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+			<h1>당신은 ${sessionScope.member.roleDTOs.get(0).roleName }입니다.</h1>
+			<h1>당신은 ${sessionScope.member.roleDTOs["0"].roleName }입니다.</h1>
+		</div>
+		
 	</section>
 	
 	<c:import url="../template/footer.jsp"></c:import>

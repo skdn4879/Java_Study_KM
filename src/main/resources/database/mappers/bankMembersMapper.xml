@@ -13,9 +13,26 @@
 		INSERT INTO memberfile(filenum, username, filename, oriname) VALUES(FILE_SEQ.NEXTVAL, #{userName}, #{fileName}, #{oriName})
 	</insert>
 
-	<select id="login" parameterType="BankMembersDTO" resultType="BankMembersDTO">
-		SELECT username, name FROM bankmembers WHERE username = #{userName} AND password = #{password}
+	<select id="login" parameterType="BankMembersDTO" resultMap="getLoginResult">
+		SELECT M.username, M.name, MR.rolenum, R.rolename FROM bankmembers M
+		INNER JOIN member_role MR
+		ON(M.username = MR.username)
+		INNER JOIN role R
+		ON(MR.rolenum = R.rolenum)
+		WHERE M.username = #{userName} AND M.password = #{password}
+		ORDER BY MR.rolenum ASC
 	</select>
+	
+	<resultMap type="BankMembersDTO" id="getLoginResult">
+		<id column="USERNAME" property="userName"/>
+		<result column="NAME" property="name"/>
+		
+		<collection property="roleDTOs" javaType="List" ofType="RoleDTO">
+			<id column="ROLENUM" property="roleNum"/>
+			<result column="ROLENAME" property="roleName"/>
+		</collection>
+		
+	</resultMap>
 	
 	<select id="getSearchById" parameterType="String" resultType="BankMembersDTO">
 		SELECT * FROM bankmembers WHERE username LIKE '%' || #{search} || '%' ORDER BY username ASC
