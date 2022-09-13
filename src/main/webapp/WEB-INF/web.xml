@@ -2,6 +2,23 @@
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee https://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- 에러 발생 시 View를 연결 -->
+	<error-page>
+		<error-code>404</error-code>
+		<error-code>405</error-code>
+		<location>/WEB-INF/views/errors/error_404.jsp</location>
+	</error-page>
+	
+	<!-- 에러 발생 시 redirect, 해당 url을 처리하는 Controller 존재해야함 -->
+	<error-page>
+		<error-code>400</error-code>
+		<location>/error/error400</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/error/error500</location>
+	</error-page>
 
 	<filter>
 		<filter-name>encode</filter-name>
