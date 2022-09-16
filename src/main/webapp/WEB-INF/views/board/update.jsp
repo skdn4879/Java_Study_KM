@@ -8,6 +8,8 @@
 <title>Update Page</title>
 
 <c:import url="../template/bootstrapCss.jsp"></c:import>
+<c:import url="../template/jQueryJs.jsp"></c:import>
+<c:import url="../template/summerNote.jsp"></c:import>
 
 </head>
 <body>
@@ -18,7 +20,7 @@
 			<h2>${requestScope.board } 수정</h2>
 		</div>
 		<div class="row">
-			<form method="post" action="update.iu">
+			<form method="post" action="update.iu" enctype="multipart/form-data">
 				<div class="input-group mb-3">
 				  <span class="input-group-text" id="basic-addon1">Title</span>
 				  <input type="text" class="form-control" placeholder="Title" aria-label="Username"
@@ -30,9 +32,21 @@
 				</div>
 				<div class="input-group input-group-lg">
 				  <span class="input-group-text">Contents</span>
-				  <textarea class="form-control" aria-label="With textarea" name="contents">${requestScope.boardDTO.contents }</textarea>
+				  <textarea class="form-control" aria-label="With textarea" name="contents" id="contents">${requestScope.boardDTO.contents }</textarea>
 				</div>
-				<input class="btn btn-primary" type="submit" value="${requestScope.board } 수정">
+				
+				<c:forEach items="${boardDTO.boardFileDTOs }" var="fileDTO">
+					<div class="input-group mb-3">
+					  <span class="form-control">${fileDTO.oriName }</span>
+					  <button type="button" class="btn btn-danger fileDelete" data-file-num="${fileDTO.fileNum }">삭제</button>
+					</div>
+				</c:forEach>
+				
+				<div id="addFiles">
+					<button type="button" class="btn btn-danger" id="fileAdd">파일 추가</button>
+				</div>
+				
+				<input class="btn btn-primary mt-4" type="submit" value="${requestScope.board } 수정">
 			</form>
 		</div>
 	</section>
@@ -40,6 +54,13 @@
 	<c:import url="../template/footer.jsp"></c:import>
 	
 	<c:import url="../template/bootstrapJs.jsp"></c:import>
+	<script type="text/javascript" src="/resources/js/board_file.js"></script>
+	<script type="text/javascript">
+		setCount(${boardDTO.boardFileDTOs.size()});
+	</script>
+	<script type="text/javascript">
+		$("#contents").summernote();
+	</script>
 	
 </body>
 </html>

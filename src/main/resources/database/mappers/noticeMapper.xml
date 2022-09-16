@@ -75,4 +75,12 @@
 		INSERT INTO noticefile VALUES(FILE_SEQ.NEXTVAL, #{num}, #{fileName}, #{oriName})
 	</insert>
 	
+	<delete id="setFileDelete" parameterType="BoardFileDTO">
+		DELETE FROM noticefile WHERE filenum = #{fileNum}
+	</delete>
+	
+	<select id="getFileDetail" parameterType="BoardFileDTO" resultType="BoardFileDTO">
+		SELECT * FROM noticefile WHERE filenum = #{fileNum}
+	</select>
+	
 </mapper>

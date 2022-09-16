@@ -198,15 +198,50 @@ public class NoticeService implements BoardService {
 	}
 
 	@Override
-	public int setUpdate(BoardDTO boardDTO) throws Exception {
+	public int setUpdate(BoardDTO boardDTO, MultipartFile[] files, ServletContext servletContext) throws Exception {
 		
-		return noticeDAO.setUpdate(boardDTO);
+		String path = "resources/upload/notice";
+		int result = noticeDAO.setUpdate(boardDTO);
+		
+		if(result < 1) {
+			return result;
+		}
+		
+		for(MultipartFile multipartFile : files) {
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
+			String fileName = fileManager.saveFile(servletContext, path, multipartFile);
+			BoardFileDTO boardFileDTO = new BoardFileDTO();
+			boardFileDTO.setFileName(fileName);
+			boardFileDTO.setOriName(multipartFile.getOriginalFilename());
+			boardFileDTO.setNum(boardDTO.getNum());
+			noticeDAO.setAddFile(boardFileDTO);
+			
+		}
+		
+		return result;
 	}
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		
 		return noticeDAO.setDelete(boardDTO);
+	}
+	
+	@Override
+	public int setFileDelete(BoardFileDTO boardFileDTO, ServletContext servletContext) throws Exception {
+		
+		boardFileDTO = noticeDAO.getFileDetail(boardFileDTO);
+		int result = noticeDAO.setFileDelete(boardFileDTO);
+		String path = "resources/upload/notice";
+		
+		if(result > 0) {
+			fileManager.deleteFile(servletContext, path, boardFileDTO);
+		}
+		
+		return result;
 	}
 
 }
